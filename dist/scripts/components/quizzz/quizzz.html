@@ -1,0 +1,68 @@
+﻿<div id="{quizID}" class="NE-Quiz-container">
+
+    {function:Render}
+    {param}
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{title}</h2>
+            <p>{introContent}</p>
+        </div>
+    </div>
+
+
+    {/param}
+
+    {param}
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{title}</h2>
+            <p>{introContent}</p>
+        </div>
+    </div>
+
+
+    {/param}
+
+    {param}
+
+    <div class="row mt-sm">
+
+        {/param}
+        {param}
+
+        <div class="NE-quiz-option-button-holder col-xs-12 col-sm-6 mb-sm">
+            <div class="NE-button white hover-blue NE-quiz-option-button{optionButtonClasses}" data-answer="{answerData}" data-fb="{feedbackIndex}">
+                <div class="inner-text">
+                    {content}
+                </div>
+            </div>
+        </div>
+
+
+        {/param}
+
+        {param}
+        <div id="{id}" class="NE-quiz-feedback-holder col-xs-12 hidden">
+            <p class="NE-quiz-feedback {mood}">
+                {content}
+            </p>
+        </div>
+        {/param}
+
+        {param}
+
+    </div>
+
+    {/param}
+
+    {/function}
+
+</div>
+
+
+
+

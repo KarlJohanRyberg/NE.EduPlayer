@@ -1,0 +1,7 @@
+﻿.NE-chapter {
+    position: relative;
+    width: 100%;
+    height: auto;
+    /*min-height: 100%;*/
+    overflow: visible;
+}

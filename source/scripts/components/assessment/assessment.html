@@ -1,0 +1,77 @@
+﻿<div id="{assessmentID}" class="NE-assessment-container">
+
+    {function:Render}
+    {param}
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{title}</h2>
+            <p>{introContent}</p>
+        </div>
+    </div>
+
+
+    {/param}
+
+    {param}
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>{title}</h2>
+            <p>{introContent}</p>
+        </div>
+    </div>
+
+
+    {/param}
+
+    {param}
+
+    <div id="assessment-{assessmentId}-q-{questionIndex}-container" class="row mt-sm">
+        <input id="assessment-{assessmentId}-q-{questionIndex}-id" type="hidden" value="{reportingId}" />
+        <input id="assessment-{assessmentId}-q-{questionIndex}-response" type="hidden" value="assessment-{assessmentId}-q-{questionIndex}-response" />
+        <input id="assessment-{assessmentId}-q-{questionIndex}-description" type="hidden" value="{reportingDescription}" />
+        <input id="assessment-{assessmentId}-q-{questionIndex}-weighting" type="hidden" value="{reportingWeighting}" />
+        
+        {/param}
+        {param}
+
+        <div class="NE-assessment-option-button-holder col-xs-12 col-sm-6 mb-sm">
+            <div class="NE-button white hover-blue NE-assessment-option-button{optionButtonClasses}"
+                data-result="{reportingResult}"
+                data-interactionkey="assessment-{assessmentId}-q-{questionIndex}" 
+                data-answer="{answerData}" 
+                data-fb="assessment-{assessmentId}-q-{questionIndex}-fb-{feedbackIndex}">
+                <div class="inner-text">
+                    {content}
+                </div>
+            </div>
+        </div>
+
+
+        {/param}
+
+        {param}
+        <div id="assessment-{assessmentId}-q-{questionIndex}-fb-{feedbackIndex}" class="NE-assessment-feedback-holder col-xs-12 hidden">
+            <p class="NE-assessment-feedback {mood}">
+                {content}
+            </p>
+        </div>
+        {/param}
+
+        {param}
+
+    </div>
+
+    {/param}
+    
+
+    {/function}
+
+</div>
+
+
+
+

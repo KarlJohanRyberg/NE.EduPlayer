@@ -1,0 +1,18 @@
+﻿.NE-page {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+    .NE-page:focus {
+        outline: none;
+        overflow: hidden;
+    }
+
+
+
+.NE-page-divider {
+    border-top: 0px solid #ccc;
+    border-bottom: 0px solid #f2f2f2;
+}

@@ -1,0 +1,29 @@
+﻿<div class="NE-vert-pages" id="{ID}">
+    <div class="NE-vert-page-holder">
+        {function:AddPages}
+        {param}
+        <div class="NE-vert-page vert-page-group-{group}" id="{ID}-{index}" data-group="{group}" data-index="{index}" data-groupindex="{groupIndex}">
+            <div class="NE-plugin-container" data-plugin="page" data-settings="{
+                    'guid': '000-000-000',
+                    'chapterIndex': '{ID}',
+                    'index': {index},
+                    'initclasses': 'NE-vert-page-content',
+                    'datafile': '{datafile}'
+                    }">
+            </div>
+        </div>
+        {/param}
+        {/function}
+    </div>
+
+    <div class="NE-vert-page-icons">
+        {function:AddIcons}
+        {param}
+        <span class="icon"></span>
+        {/param}
+        {/function}
+    </div>
+    <div class="NE-vert-page-prev NE-vert-page-nav"><i class="fa fa-angle-left"></i></div>
+    <div class="NE-vert-page-next NE-vert-page-nav"><i class="fa fa-angle-right"></i></div>
+
+</div>

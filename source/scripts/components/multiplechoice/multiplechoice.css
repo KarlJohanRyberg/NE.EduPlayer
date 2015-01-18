@@ -1,0 +1,18 @@
+﻿.NE-multiple-chioce-option {
+    cursor: pointer;
+    border: 2px solid #f2f2f2;
+    -webkit-transition: border 0.2s linear;
+    transition: border 0.2s linear;
+}
+
+    .NE-multiple-chioce-option.hover {
+        border-color: #ffb097;
+    }
+
+    .NE-multiple-chioce-option.active {
+        border-color: #FF612F;
+    }
+
+   .NE-multiple-chioce-option .option-image{
+       min-width: 100%;
+   }
