@@ -108,7 +108,7 @@ NE.Plugin.chapterlist = function (i_params) {
             NE.Plugin.ApplyTemplate(this, function (data) {
 
                 var panelClasses = _settings.panelClasses || '';
-                data = data.replace(/{panelID}/g, _settings.panelID).replace(/{panelClasses}/g, panelClasses);
+                data = data.replace(/{ID}/g, _settings.panelID).replace(/{panelClasses}/g, panelClasses);
 
                 _myDOMContent = $(data);
                 _addToDOM(_myDOMContent);
@@ -135,7 +135,7 @@ NE.Plugin.chapterlist = function (i_params) {
             var reps = 1;
             var colspan = 'col-xs-12';
             colspan += ' col-sm-6';
-            if (numChapters > breakLimit) {
+            if (numChapters >= breakLimit) {
                 reps = 2;
             }
 

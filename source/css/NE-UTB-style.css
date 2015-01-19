@@ -142,8 +142,6 @@ button:active {
     border-top: 3px solid #00c8dc;
     border-bottom: 3px solid #00c8dc;
     padding: 30px;
-    padding-top: 45px;
-    padding-bottom: 45px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -173,6 +171,7 @@ button:active {
         }
 
 .NE-info-panel {
+    position:relative;
     padding: 30px;
     padding-bottom: 45px;
     margin-top: 30px;
@@ -365,7 +364,6 @@ button:active {
     height: 30px;
     background-image: url('../images/shade-bottom.png');
 }
-
 
 .NE-shade-top-light {
     position: absolute;

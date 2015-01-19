@@ -1,5 +1,4 @@
-﻿
-/////////////////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////////////////
 //
 //  TYPE: 
 //  NAME: 
@@ -45,14 +44,19 @@ NE.SCORM = (function () {
 
         NE.LMS.AddEvent(NE.LMS.ON_COMPLETION_STATUS_CHANGED, function (e) {
             _completion = e.status;
-            console.log(NE.CourseTree.SCO_name + ' is ' + _completion);
+           // console.log(NE.CourseTree.SCO_name + ' is ' + _completion);
 
-            NE.LMS.Objectives.Set([{
-                id: NE.CourseTree.SCO_name,
-                completion_status: _completion || 'incomplete',
-                success_status: _success || 'unknown',
-                progress_measure: _progress || 0
-            }]);
+            try {
+                NE.LMS.Objectives.Set([{
+                    id: NE.CourseTree.SCO_name,
+                    completion_status: _completion || 'incomplete',
+                    success_status: _success || 'unknown',
+                    progress_measure: _progress || 0
+                }]);
+            }
+            catch (ex) {
+                console.warn('Failed to set status of objective: ' + NE.CourseTree.SCO_name);
+            }
 
         }, this);
 

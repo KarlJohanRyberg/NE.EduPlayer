@@ -14,8 +14,20 @@
     color: #ff3631;
 }
 
+.ligtgrey {
+    color: #f2f2f2;
+}
+
 .mediumgrey {
     color: #959595;
+}
+
+.darkergray {
+    color: #c1c1c1;
+}
+
+.darkgrey {
+    color: #808080;
 }
 
 .light {
@@ -47,8 +59,20 @@ body, p, li {
     line-height: 36px;
 }
 
+.NE-x-large-header {
+    font-size: 32px;
+    line-height: 45px;
+}
+
 .NE-instruction {
-    font-weight: bold;
+    background-color: #ffa736;
+    color: white;
+    padding: 6px;
+}
+
+.NE-media-caption {
+margin-top: 10px;
+color: #959595;
 }
 
 .NE-letter-text {
