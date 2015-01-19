@@ -16,13 +16,25 @@
     </div>
 
     <div class="row mt-md mb-md">
+
+            
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
 
             <h2 class="NE-medium-header light mediumgrey">chapterlist</h2>
             <p>
                 The "chapterlist" component displays a list of all chapters in the course that has the "displayInMenu" property set to true.
             </p>
-<pre class="mb-sm">
+
+            <div id="chapterlist_code" class="hidden mt-sm">
+
+                <div class="NE-plugin-container" data-plugin="chapterlist" data-settings="{
+                    'ID': 'example-menu',
+                    'linkPrefix': 'NE-chapterlink',
+                    'panelClasses': '',
+                    'breaklimit': 2
+                    }"></div>
+
+<pre class="mt-sm">
 &lt;div class="NE-plugin-container" data-plugin="chapterlist" data-settings="{
                     'ID': '', // The desierd ID of the component
                     'linkPrefix': '', // The chapter links will get an ID with this prexis plus an index
@@ -32,47 +44,35 @@
 &lt;/div&gt;
 </pre>
 
-            <div class="NE-plugin-container" data-plugin="chapterlist" data-settings="{
-                    'ID': 'example-menu',
-                    'linkPrefix': 'NE-chapterlink',
-                    'panelClasses': '',
-                    'breaklimit': 2
-                    }"></div>
+            </div>
 
         </div>
 
-
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
-
-            <h2 class="NE-medium-header light mediumgrey">multiplechoice</h2>
-            <p>
-                The "multiplechoice" component shows a list of panels where the user can pick one.
-            </p>
-<pre class="mb-sm">
-&lt;div class="NE-plugin-container" data-plugin="multiplechoice" data-settings="{
-            'ID': // The desierd ID of the component
-            'SelectOne': // Set to false if the user should be able to pick more than one option
-            'OptionIDPrefix': // The panels will get an ID with this prexis plus an index
-            'options': [ // A list of the different options, each will render oen panel
-                        {
-                            'Images': ['default.xx','hover.xx','active.xx'], // A list of images for the different states
-                            'Title': '', // The title of the panel
-                            'Text': // Panel text
-                        }
-            ]
-        }"&gt;
-&lt;/div&gt;
-<b>Events: OnChanged</b>
-&lt;script type="text/javascript"&gt;
-    NE.Plugin.AttachEvent('component_ID', 'OnChanged', function (i_items) {
-        // Custom code goes here
-    });
-&lt;/script&gt;
-</pre>
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'chapterlist_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
         </div>
 
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-            <div class="NE-plugin-container" data-plugin="multiplechoice" data-settings="{
+
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 mt-md NE-section-divider-top">
+
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+
+
+                <h2 class="NE-medium-header light mediumgrey">multiplechoice</h2>
+                <p>
+                    The "multiplechoice" component shows a list of panels where the user can pick one.
+                </p>
+
+                <div id="multiplechoice_code" class="hidden mt-sm">
+
+                    <div class="NE-plugin-container" data-plugin="multiplechoice" data-settings="{
                         'ID': 'Multichioce_003',
                         'SelectOne': true,
                         'OptionIDPrefix': 'Multichioce_003_',
@@ -95,9 +95,47 @@
                         ]
                     }"></div>
 
+
+
+
+<pre class="mt-md">
+&lt;div class="NE-plugin-container" data-plugin="multiplechoice" data-settings="{
+            'ID': // The desierd ID of the component
+            'SelectOne': // Set to false if the user should be able to pick more than one option
+            'OptionIDPrefix': // The panels will get an ID with this prexis plus an index
+            'options': [ // A list of the different options, each will render oen panel
+                        {
+                            'Images': ['default.xx','hover.xx','active.xx'], // A list of images for the different states
+                            'Title': '', // The title of the panel
+                            'Text': // Panel text
+                        }
+            ]
+        }"&gt;
+&lt;/div&gt;
+<b>Events: OnChanged</b>
+&lt;script type="text/javascript"&gt;
+    NE.Plugin.AttachEvent('component_ID', 'OnChanged', function (i_items) {
+        // Custom code goes here
+    });
+&lt;/script&gt;
+</pre>
+                </div>
+
+
+            </div>
+
         </div>
 
-
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'multiplechoice_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
 
 
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
@@ -107,7 +145,17 @@
                 This comonent shows a button that will take you to the next page in the course
             </p>
 
-            <pre>
+            <div id="nextbutton_code" class="hidden mt-sm">
+
+                <div class="NE-plugin-container" data-plugin="nextbutton" data-settings="{
+                             'ID': 'exampleNxtBtn',
+                             'text': 'Gå vidare',
+                             'initclasses': '',
+                             'iconclass': ''
+                             }">
+                </div>
+
+                <pre class="mt-sm">
 &lt;div class="NE-plugin-container" data-plugin="nextbutton" data-settings="{
                     'ID': '', // The desierd ID of the component
                     'text': '', // The text of the button
@@ -125,34 +173,57 @@
 &lt;/script&gt;
            </pre>
 
+                <script type="text/javascript">
 
-            <div class="col-xs-12 text-center mt-md">
-                <div class="NE-plugin-container" data-plugin="nextbutton" data-settings="{
-                             'ID': 'exampleNxtBtn',
-                             'text': 'Gå vidare',
-                             'initclasses': '',
-                             'iconclass': ''
-                             }">
-                </div>
+                    NE.Plugin.AttachEvent('exampleNxtBtn', 'ClickOverride', function (sender, e, base) {
+                        return false;
+                    });
+
+                </script>
+
             </div>
 
-            <script type="text/javascript">
+        </div>
 
-                NE.Plugin.AttachEvent('exampleNxtBtn', 'ClickOverride', function (sender, e, base) {
-                    return false;
-                });
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'nextbutton_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
 
-            </script>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">quiz</h2>
+            <p>
+                Quiz is used to ask questions to the user and collect the response and give feedback.
+            </p>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">revealbutton</h2>
+            <p>
+                Revealbutton is used to toggle the visibility of a part of the page.
+            </p>
 
         </div>
 
 
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
 
-            <h2 class="NE-medium-header light mediumgrey">revealbutton</h2>
+            <h2 class="NE-medium-header light mediumgrey">verticalnav</h2>
             <p>
-                Revealbutton is used to toggle the visibility of a part of the page. 
+                Verticalnav is used to display e series of sub pages in a vertical slider. With or without visible navigation.
+                It can be used as a way for the user to browse or as a way to make selection.
+                <br />
+                With the filter function and no visible navigation, it can be used to change page content based on user selections.
             </p>
 
         </div>
-</div>
+    </div>

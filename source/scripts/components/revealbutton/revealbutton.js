@@ -107,7 +107,9 @@ NE.Plugin.revealbutton = function (i_params) {
             var returnVal = params[0].data;
             var openText = _settings.openText || '';
             var keepOpen = _settings.keepOpen || true;
+            var initClasses = _settings.initclasses ? ' ' + _settings.initclasses : '';
 
+            returnVal = returnVal.replace(/{initClasses}/g, initClasses);
             returnVal = returnVal.replace(/{revealItemID}/g, _settings.revealItemID);
             returnVal = returnVal.replace(/{initText}/g, _settings.initText);
             returnVal = returnVal.replace(/{openText}/g, openText);
@@ -117,7 +119,7 @@ NE.Plugin.revealbutton = function (i_params) {
         },
 
         OnLoaded: function (e) { },
-
+        
         eof: null
     };
 
