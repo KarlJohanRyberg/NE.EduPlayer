@@ -65,6 +65,7 @@ body, p, li {
 }
 
 .NE-instruction {
+    display: inline-block;
     background-color: #ffa736;
     color: white;
     padding: 6px;
