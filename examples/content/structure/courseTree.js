@@ -68,6 +68,42 @@ if (NE === null || NE === undefined) { var NE = {}; } NE.CourseTree = {
                     "title": "Layout &amp; panels",
                     "datafile": "005_chapter3_page1",
                     "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "006_chapter3_page2",
+                    "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "007_chapter3_page3",
+                    "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "008_chapter3_page4",
+                    "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "009_chapter3_page5",
+                    "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "010_chapter3_page6",
+                    "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "011_chapter3_page7",
+                    "stopprogress": false
                 }
             ]
         }

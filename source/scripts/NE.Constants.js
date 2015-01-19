@@ -44,11 +44,11 @@ NE.Constants = (function () {
         var scripts = document.getElementsByTagName("script");
         var src = scripts[scripts.length - 1].src;
 
-        _basePath = src.match(/^(http.+\/)[^\/]+$/)[1];
+        _basePath = src.match(/^(http.+\/)/)[1];
         _basePath = _basePath.split('/').slice(0, -2).join('/');
 
 
-        _contentPath = window.location.href.match(/^(http.+\/)[^\/]+$/)[1];
+        _contentPath = window.location.href.match(/^(http.+\/)/)[1];
         _contentPath = _contentPath.split('/').slice(0, -2).join('/');
 
     })();

@@ -1,0 +1,93 @@
+﻿<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">verticalnav</h2>
+            <p>
+                Verticalnav is used to display e series of sub pages in a vertical slider. With or without visible navigation.
+                It can be used as a way for the user to browse or as a way to make selection.
+                <br />
+                With the filter function and no visible navigation, it can be used to change page content based on user selections.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="verticalnav_code" class="hidden mt-sm">
+    <div class="NE-full-width NE-bg-darkgrey">
+        <div class="NE-plugin-container" data-plugin="verticalnav" data-settings="{
+                            'ID': 'Vert_Example',
+                            'hidenavigation': false,
+                            'pages': [
+                            {
+                                'datafile': '../content/data/vert_example/opt-1-0.html',
+                                'group':'0'
+                            },
+                            {
+                                'datafile': '../content/data/vert_example/opt-1-1.html',
+                                'group':'0'
+                            }
+                            ]
+                        }">
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+
+<pre class="mt-sm">&lt;div class="NE-plugin-container" data-plugin="verticalnav" data-settings="{
+    'ID': 'Vert_Example', // The desierd ID of the component
+    'hidenavigation': 'false', // If set to true, the navigation is not displayed in the panel
+    'pages': [ // A list of page objects to display in the panel
+    {
+        'datafile': '../content/data/vert_example/opt-1-0.html', // Path to the page data file
+        'group':'0' // A group index of the page, is used by the Filter function
+    },
+    {
+        'datafile': '../content/data/vert_example/opt-1-1.html',
+        'group':'0'
+    }
+    ]
+}"&gt;
+&lt;/div&gt;
+
+<b>Events: OnChanged</b>
+&lt;script type="text/javascript"&gt;
+    NE.Plugin.AttachEvent('Vert_Example', 'OnChanged', function (sender) {
+        // Custom code goes here
+    });
+&lt;/script&gt;
+
+<b>Methods: Filter</b>
+    NE.Plugin['Vert_Example'].Filter(groupIndex, pageIndex);
+    // Hides all pages in the verticalnav panel except the ones 
+    // matched by the group index and the optional page index</pre>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="row mb-md">
+
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'verticalnav_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
+
+    </div>
+</div>

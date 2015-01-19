@@ -3,6 +3,8 @@
     padding-bottom: 80px;
 }
 
+
+
 .NE-vert-page-icons {
     position: absolute;
     bottom: 0px;
@@ -112,6 +114,7 @@
 }
 
 .NE-vert-page {
+
     display: inline-block;
     float: left;
 }

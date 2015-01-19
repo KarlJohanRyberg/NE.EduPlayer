@@ -1,0 +1,60 @@
+﻿<div class="container">
+    <div class="row ">
+
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">revealbutton</h2>
+            <p>
+                Revealbutton is used to toggle the visibility of a part of the page.
+            </p>
+
+            <div id="revealbutton_code" class="hidden mt-sm">
+
+                <div id="hidden_example_panel" class="row hidden pb-sm">
+                    <div class="col-xs-12 pt-md pm-md NE-info-panel">
+                        <h4 class="NE-medium-header light darkergray">Hidden content</h4>
+                        <p>
+                            Ut at sem sem. Nulla velit nisi, condimentum id neque in, placerat vulputate metus.
+                            Ut lacus elit, elementum eget urna a, posuere vehicula diam. Nullam gravida ligula et
+                            purus fermentum, at maximus enim pulvinar. Phasellus id molestie orci.
+                            Proin vel odio facilisis, aliquam dui et, condimentum nunc.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'hidden_example_panel',
+                    'initText': 'Show',
+                    'openText': 'Hide',
+                    'initclasses': '',
+                    'keepOpen': 'true'
+                    }">
+                </div>
+
+
+<pre class="mt-sm">&lt;div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+    'revealItemID': 'quiz_code', // The ID of the hidden component that the button shall reveal
+    'initText': 'Show code', // The text initially displayd on the button
+    'openText': 'Hide code', // The text that is shown when the button is in the "open" state
+    'initclasses': '', // Extra CSS classes that shall be added to the component
+    'keepOpen': 'true' // If true, the button remains visible after it has reveald. It can then be used to close the hidden panel again
+    }"&gt;
+&lt;/div&gt;</pre>
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'revealbutton_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿<div class="container">
+    <div class="row mb-md">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">quiz</h2>
+            <p>
+                Quiz is used to ask questions to the user and collect the response and give feedback.
+            </p>
+
+            <p class="red">
+                <span class="bold">Note!</span>
+                <br />
+                At the moment the quiz component only support one question. It will render more
+                than one quistion but the logic for submitting and giving feedback för multiple quistions are not implemented
+            </p>
+
+            <div id="quiz_code" class="hidden mt-sm">
+
+                <div class="NE-plugin-container" data-plugin="quiz" data-settings="{
+                    'datafile': '../content/data/quizes/quiz-01.txt',
+                    'ID':'quiz-01'
+                    }">
+                </div>
+
+
+<pre class="mt-sm">&lt;div class="NE-plugin-container" data-plugin="quiz" data-settings="{
+    'datafile': '../content/data/quizes/quiz-01.txt', // Path to the quiz data file
+    'ID':'quiz-example' // The desierd ID of the component
+    }"&gt;
+&lt;/div&gt;
+
+<b>Events: OnSubmit</b>
+&lt;script type="text/javascript"&gt;
+    NE.Plugin.AttachEvent('quiz-example', 'OnSubmit', function (sender) {
+        // Custom code goes here
+    });
+&lt;/script&gt;</pre>
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'quiz_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
+
+    </div>
+</div>

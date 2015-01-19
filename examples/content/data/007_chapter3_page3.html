@@ -1,0 +1,78 @@
+﻿<div class="container">
+    <div class="row mb-md">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 mt-md NE-section-divider-top">
+
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+
+
+                <h2 class="NE-medium-header light mediumgrey">multiplechoice</h2>
+                <p>
+                    The "multiplechoice" component shows a list of panels where the user can pick one.
+                </p>
+
+                <div id="multiplechoice_code" class="hidden mt-sm">
+
+                    <div class="NE-plugin-container" data-plugin="multiplechoice" data-settings="{
+                        'ID': 'Multichioce_003',
+                        'SelectOne': true,
+                        'OptionIDPrefix': 'Multichioce_003_',
+                        'options': [
+                                    {
+                                        'Images': ['scenarie1.jpg', 'scenarie1hover.jpg', 'scenarie1aktiv.jpg'],
+                                        'Title': 'Panel 1',
+                                        'Text': 'Text for panel 1'
+                                    },
+                                    {
+                                        'Images': ['scenarie2.jpg', 'scenarie2hover.jpg', 'scenarie2aktiv.jpg'],
+                                        'Title': 'Panel 2',
+                                        'Text': 'Text for panel 2'
+                                    },
+                                    {
+                                        'Images': ['scenarie3.jpg', 'scenarie3hover.jpg', 'scenarie3aktiv.jpg'],
+                                        'Title': 'Panel 3',
+                                        'Text': 'Text for panel 3'
+                                    }
+                        ]
+                    }"></div>
+
+
+
+
+<pre class="mt-md">&lt;div class="NE-plugin-container" data-plugin="multiplechoice" data-settings="{
+    'ID': // The desierd ID of the component
+    'SelectOne': // Set to false if the user should be able to pick more than one option
+    'OptionIDPrefix': // The panels will get an ID with this prexis plus an index
+    'options': [ // A list of the different options, each will render oen panel
+                {
+                    'Images': ['default.xx','hover.xx','active.xx'], // A list of images for the different states
+                    'Title': '', // The title of the panel
+                    'Text': // Panel text
+                }
+    ]
+}"&gt;
+&lt;/div&gt;
+
+<b>Events: OnChanged</b>
+&lt;script type="text/javascript"&gt;
+    NE.Plugin.AttachEvent('component_ID', 'OnChanged', function (i_items) {
+        // Custom code goes here
+    });
+&lt;/script&gt;</pre>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'multiplechoice_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -3,7 +3,6 @@
     -webkit-transform: translate3d(0px,0px,0px);
 }
 
-
 .offering-header-text {
     margin-top: 0px;
 }
@@ -63,8 +62,24 @@ button:active {
     background-color: #00c8dc;
 }
 
+.NE-bg-green {
+    background-color: #4aaf57;
+}
+
 .NE-bg-lightgrey {
     background-color: #f2f2f2;
+}
+
+.NE-bg-mediumgrey {
+    background-color: #959595;
+}
+
+.NE-bg-darkergray {
+    background-color: #c1c1c1;
+}
+
+.NE-bg-darkgrey {
+    background-color: #808080;
 }
 
 .NE-arrow-white {
@@ -171,7 +186,7 @@ button:active {
         }
 
 .NE-info-panel {
-    position:relative;
+    position: relative;
     padding: 30px;
     padding-bottom: 45px;
     margin-top: 30px;

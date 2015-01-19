@@ -1,0 +1,43 @@
+﻿<div class="container">
+    <div class="row mb-md">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">chapterlist</h2>
+            <p>
+                The "chapterlist" component displays a list of all chapters in the course that has the "displayInMenu" property set to true.
+            </p>
+
+            <div id="chapterlist_code" class="hidden mt-sm">
+
+                <div class="NE-plugin-container" data-plugin="chapterlist" data-settings="{
+                    'ID': 'example-menu',
+                    'linkPrefix': 'NE-chapterlink',
+                    'panelClasses': '',
+                    'breaklimit': 2
+                    }"></div>
+
+<pre class="mt-sm">&lt;div class="NE-plugin-container" data-plugin="chapterlist" data-settings="{
+    'ID': '', // The desierd ID of the component
+    'linkPrefix': '', // The chapter links will get an ID with this prexis plus an index
+    'panelClasses': '', // Extra CSS classes that shall be added to the component
+    'breaklimit': 2 // The number of links per row
+    }"&gt;
+&lt;/div&gt;</pre>
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'chapterlist_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
+
+    </div>
+</div>

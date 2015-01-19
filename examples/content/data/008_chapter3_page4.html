@@ -1,0 +1,62 @@
+﻿<div class="container">
+    <div class="row mb-md">
+
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 mt-md NE-section-divider-top">
+
+            <h2 class="NE-medium-header light mediumgrey">nextbutton</h2>
+            <p>
+                This comonent shows a button that will take you to the next page in the course
+            </p>
+
+            <div id="nextbutton_code" class="hidden mt-sm">
+
+                <div class="NE-plugin-container" data-plugin="nextbutton" data-settings="{
+                             'ID': 'exampleNxtBtn',
+                             'text': 'Gå vidare',
+                             'initclasses': '',
+                             'iconclass': ''
+                             }">
+                </div>
+
+<pre class="mt-sm">&lt;div class="NE-plugin-container" data-plugin="nextbutton" data-settings="{
+    'ID': '', // The desierd ID of the component
+    'text': '', // The text of the button
+    'initClasses': '', // Extra CSS classes that shall be added to the button
+    'iconclass': '' // The Font Awesome icon of the button. Defaults to 'fa-angle-down'
+                    }"&gt;
+&lt;/div&gt;
+
+<b>Events: ClickOverride</b>
+&lt;script type="text/javascript"&gt;
+    NE.Plugin.AttachEvent('component_ID', 'ClickOverride', function (sender, e, base) {
+        // Custom code goes here
+        // If you want to call the buttons default callback, call base()
+        base(sender, e);
+    });
+&lt;/script&gt;</pre>
+
+                <script type="text/javascript">
+
+                NE.Plugin.AttachEvent('exampleNxtBtn', 'ClickOverride', function (sender, e, base) {
+                    return false;
+                });
+
+                </script>
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 mt-sm col-sm-8 col-sm-offset-2">
+            <div class="NE-plugin-container" data-plugin="revealbutton" data-settings="{
+                    'revealItemID': 'nextbutton_code',
+                    'initText': 'Show code',
+                    'openText': 'Hide code',
+                    'initclasses': 'no-bg hover-blue NE-small-button',
+                    'keepOpen': true
+                 }">
+            </div>
+        </div>
+
+    </div>
+</div>

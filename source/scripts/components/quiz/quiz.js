@@ -28,7 +28,7 @@ if (NE === null || NE === undefined) { var NE = {}; }
 if (NE.Plugin === null || NE.Plugin === undefined) { NE.Plugin = {}; }
 
 NE.Plugin.quiz = function (i_params) {
-
+    
     //////////////////////
     //
     //  Private fields 
@@ -149,8 +149,6 @@ NE.Plugin.quiz = function (i_params) {
                 });
             }
 
-            if (i_rowCount > 0) item.parent().addClass('mt-xs');
-
         }
     }
 
@@ -262,11 +260,16 @@ NE.Plugin.quiz = function (i_params) {
 
                 returnVal += params[2].data;
 
+                var colspan = 4;
+                if (question.options.length == 1) colspan = 12;
+                if (question.options.length == 2) colspan = 6;
+
                 for (var j = 0; j < question.options.length; j++) {
                     var option = question.options[j];
                     var optData = params[3].data;
                     var classes = '';
                     if (question.questionType == 'singleChoice') classes += ' toggle';
+                    optData = optData.replace(/{buttonnColspan}/g, colspan);
                     optData = optData.replace(/{content}/g, option.content);
                     optData = optData.replace(/{answerData}/g, option.answerData);
                     optData = optData.replace(/{feedbackIndex}/g, option.feedbackIndex);

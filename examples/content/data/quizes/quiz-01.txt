@@ -1,0 +1,44 @@
+﻿{
+    "autoSubmit": true,
+    "title": "",
+    "introContent": "",
+    "questions": [
+        {
+            "questionType": "singleChoice",
+            "title": "Do you think this is a fake question",
+            "introContent": "",
+            "correctAnswer": "answerYes",
+            "feedback": [
+                {
+                    "content": "This feednack is positive. Good work!",
+                    "mood": "positive"
+                },
+                {
+                    "content": "This feednack is neutral. Please try again!",
+                    "mood": "neutral"
+                },
+                {
+                    "content": "This feednack is negative. You might need to study a bit more",
+                    "mood": "negative"
+                }
+            ],
+            "options": [
+                {
+                    "content": "Yes",
+                    "answerData": "answerYes",
+                    "feedbackIndex": 0
+                },
+                {
+                    "content": "Maybe",
+                    "answerData": "answerMaybe",
+                    "feedbackIndex": 1
+                },
+                {
+                    "content": "No",
+                    "answerData": "answerNo",
+                    "feedbackIndex": 2
+                }
+            ]
+        }
+    ]
+}
