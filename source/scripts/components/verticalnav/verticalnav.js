@@ -93,7 +93,7 @@ NE.Plugin.verticalnav = function (i_params) {
         if (tallest > 0) {
             $('.NE-eq-height', panelSelector).find('.pusher').first().css('height', tallest + 'px');
         }
-        alert(tallest);
+
     }
 
     function _afterLoad() {
