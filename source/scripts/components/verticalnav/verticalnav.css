@@ -3,22 +3,24 @@
     padding-bottom: 80px;
 }
 
-
-
-.NE-vert-page-icons {
+.NE-vert-page-navbar {
     position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
     height: 80px;
     background-color: white;
+}
+
+
+.NE-vert-page-icons {
     text-align: center;
 }
 
     .NE-vert-page-icons .icon {
         font-size: 16px;
         line-height: 80px;
-        margin: 0px 6px;
+        margin: 0px 6px 24px 0px;
     }
 
         .NE-vert-page-icons .icon:before {
@@ -34,78 +36,28 @@
         }
 
 .NE-vert-page-nav {
-    position: absolute;
-    top: 0px;
-    bottom: 80px;
-    width: 80px;
-    color: rgba(255,255,255,0.5);
+    color: #808080;
     cursor: pointer;
     -webkit-transition: color 0.2s linear;
     transition: color 0.2s linear;
 }
 
     .NE-vert-page-nav i {
-        position: absolute;
-        top: -120px;
-        bottom: 0px;
-        width: 100%;
-        height: 0px;
-        margin: auto;
-        font-size: 120px;
+        font-size: 40px;
+        line-height: 80px;
         text-align: center;
     }
 
     .NE-vert-page-nav:hover {
-        color: rgba(255,255,255,0.9);
+        color: black;
     }
 
 .NE-vert-page-next {
     right: 0px;
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.2))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%); /* Chrome10+,Safari5.1+ */
-    background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%); /* W3C */
 }
 
 .NE-vert-page-prev {
     left: 0px;
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-    background: linear-gradient(to right, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* W3C */
-}
-
-@media (max-width: 768px) {
-    .NE-vert-page-nav {
-        top: auto;
-        bottom: 0px;
-        width: 80px;
-        height: 80px;
-        color: #808080;
-    }
-
-        .NE-vert-page-nav i {
-            position: absolute;
-            top: -40px;
-            bottom: 0px;
-            width: 100%;
-            height: 0px;
-            margin: auto;
-            font-size: 40px;
-            text-align: center;
-        }
-
-        .NE-vert-page-nav:hover {
-            color: black;
-        }
-
-    .NE-vert-page-next {
-        right: 0px;
-        background: none;
-    }
-
-    .NE-vert-page-prev {
-        left: 0px;
-        background: none;
-    }
 }
 
 

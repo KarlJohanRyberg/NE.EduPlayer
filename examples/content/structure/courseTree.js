@@ -104,6 +104,12 @@ if (NE === null || NE === undefined) { var NE = {}; } NE.CourseTree = {
                     "title": "Layout &amp; panels",
                     "datafile": "011_chapter3_page7",
                     "stopprogress": false
+                },
+                {
+                    "guid": "19CEAB46-9E1A-430E-9325-9EBA8D397075",
+                    "title": "Layout &amp; panels",
+                    "datafile": "012_chapter3_page8",
+                    "stopprogress": false
                 }
             ]
         }

@@ -20,7 +20,7 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['<%= jshint.files %>', 'source/**/*.css'],
+            files: ['<%= jshint.files %>', 'source/**/*.css', 'source/**/*.html'],
             tasks: ['compile']
         },
 
