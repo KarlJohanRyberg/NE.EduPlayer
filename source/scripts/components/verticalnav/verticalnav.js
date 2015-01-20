@@ -65,6 +65,11 @@ NE.Plugin.verticalnav = function (i_params) {
         $('.NE-eq-height', panelSelector).css('height', '');
 
         $('.NE-eq-height').each(function () {
+
+            if (!$(this).find('.pusher').length) {
+                $(this).prepend($('<div/>').addClass('pusher'));
+            }
+
             $(this).parents().each(function () {
                 if ($(this).hasClass('hidden')) {
                     hiddenElements.push([$(this), 'hidden']);
@@ -81,6 +86,7 @@ NE.Plugin.verticalnav = function (i_params) {
         $('.NE-eq-height', panelSelector).each(function () {
             var orgHeight = $(this).outerHeight();
             orgHeight = orgHeight === 0 ? $(this).data('orgHeight') : orgHeight;
+            $(this).data('orgHeight', orgHeight);
             if (orgHeight > tallest && $(this).hasClass('filter-visible')) {
                 tallest = orgHeight;
             }
@@ -90,8 +96,13 @@ NE.Plugin.verticalnav = function (i_params) {
             hiddenElements[i][0].addClass(hiddenElements[i][1]);
         }
 
+   
+        
         if (tallest > 0) {
-            $('.NE-eq-height', panelSelector).find('.pusher').first().css('height', tallest + 'px');
+            $('.NE-eq-height', panelSelector).each(function () {
+                var padding = tallest -  $(this).data('orgHeight');
+                $(this).find('.NE-eq-height-padder').first().css('height', padding + 'px');
+            });
         }
 
     }
@@ -119,7 +130,7 @@ NE.Plugin.verticalnav = function (i_params) {
         $('.NE-eq-height', $('#' + _settings.ID)).each(function () {
             $(this).data('orgHeight', $(this).outerHeight());
         });
-
+        
         me.Filter();
         NE.Plugin.verticalnav.EventHandlers.NavTo(me);
         me.OnLoaded();

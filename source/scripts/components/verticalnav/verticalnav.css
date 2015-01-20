@@ -114,7 +114,17 @@
 }
 
 .NE-vert-page {
-
     display: inline-block;
     float: left;
 }
+
+.NE-eq-height {
+    position: relative;
+    overflow: hidden;
+    height: auto;
+}
+
+    .NE-eq-height .NE-eq-height-padder {
+        background-color: transparent;
+        width: 0px;
+    }
