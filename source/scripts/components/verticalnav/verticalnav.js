@@ -65,20 +65,18 @@ NE.Plugin.verticalnav = function (i_params) {
         $('.NE-eq-height-padder', panelSelector).css('height', '');
       
 
-        $('.NE-eq-height').each(function () {
-
-            if (!$(this).find('.pusher').length) {
-                $(this).prepend($('<div/>').addClass('pusher'));
-            }
+        $('.NE-eq-height', panelSelector).each(function () {
 
             $(this).parents().each(function () {
                 if ($(this).hasClass('hidden')) {
                     hiddenElements.push([$(this), 'hidden']);
                     $(this).removeClass('hidden');
+                   $(this).css('display', '');
                 }
                 else if ($(this).hasClass('NE-nav-hidden')) {
                     hiddenElements.push([$(this), 'NE-nav-hidden']);
                     $(this).removeClass('NE-nav-hidden');
+                    $(this).css('display', '');
                 }
             });
         });
@@ -95,12 +93,10 @@ NE.Plugin.verticalnav = function (i_params) {
             hiddenElements[i][0].addClass(hiddenElements[i][1]);
         }
 
-
-
         if (tallest > 0) {
             $('.NE-eq-height', panelSelector).each(function () {
                 var padding = tallest - $(this).data('orgHeight');
-                console.log(tallest - $(this).data('orgHeight'));
+            
                 $(this).find('.NE-eq-height-padder').css('height', padding + 'px');
             });
         }
@@ -127,8 +123,7 @@ NE.Plugin.verticalnav = function (i_params) {
 
         if (_settings.hidenavigation) {
             var panel = $('#' + _settings.ID);
-            panel.css('padding-bottom', '0px');
-            panel.find('.NE-vert-page-nav, .NE-vert-page-icons').hide();
+            panel.find('.NE-vert-page-navbar').hide();
         }
 
         $('.NE-eq-height', $('#' + _settings.ID)).each(function () {

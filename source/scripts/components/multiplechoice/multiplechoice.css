@@ -1,18 +1,29 @@
 ﻿.NE-multiple-chioce-option {
     cursor: pointer;
-    border: 2px solid #f2f2f2;
-    -webkit-transition: border 0.2s linear;
-    transition: border 0.2s linear;
+    border: 1px solid transparent;
+    -webkit-transition: border 0.2s linear, background-color 0.2s linear;
+    transition: border 0.2s linear, background-color 0.2s linear;
+    background-color: transparent;
 }
 
+    .NE-multiple-chioce-option .puffar-item-body {
+        background-color: transparent;
+        height: auto;
+        min-height: 250px;
+    }
+
     .NE-multiple-chioce-option.hover {
-        border-color: #ffb097;
+        border-color: #c1c1c1;
+        background-color: white;
     }
 
     .NE-multiple-chioce-option.active {
-        border-color: #FF612F;
+        border-color: #808080;
+        background-color: white;
     }
 
-   .NE-multiple-chioce-option .option-image{
-       min-width: 100%;
-   }
+    .NE-multiple-chioce-option .option-image {
+        padding: 12px;
+        padding-bottom: 0px;
+        min-width: 100%;
+    }

@@ -34,7 +34,7 @@ NE.EventHandlers = (function () {
     //
     /////////////////////
 
-
+    var _bookmarkTImer;
     var _resizeTimer;
     var _chaptersLoaded = 0;
 
@@ -172,10 +172,14 @@ NE.EventHandlers = (function () {
 
                 NE.Navigation.ToPage(NE.Navigation.CurrentPageIndex, NE.Navigation.CurrentChapterIndex);
 
-                if (NE.CourseTree.chapters[chapterIndex].pages[pageIndex].keepprogress !== false) {
-                    NE.LMS.Bookmark.SetBookmark(i_item.attr('id'));
-                    NE.UI.SetNavigationButtons();
-                }
+                clearTimeout(_bookmarkTImer);
+
+                _bookmarkTImer = setTimeout(function () {
+                    if (NE.CourseTree.chapters[chapterIndex].pages[pageIndex].keepprogress !== false) {
+                        NE.LMS.Bookmark.SetBookmark(i_item.attr('id'));
+                        NE.UI.SetNavigationButtons();
+                    }
+                });
 
             }
 

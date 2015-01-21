@@ -1,14 +1,8 @@
 ﻿.NE-vert-pages {
     position: relative;
-    padding-bottom: 80px;
 }
 
 .NE-vert-page-navbar {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    height: 80px;
     background-color: white;
 }
 

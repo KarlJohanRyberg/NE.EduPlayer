@@ -114,7 +114,7 @@ button:active {
         height: 16px;
         width: 50%;
         left: -16px;
-        border-top: 2px solid #f2f2f2;
+        border-top: 1px solid #c1c1c1;
     }
 
     .NE-arrow-border:after {
@@ -123,7 +123,7 @@ button:active {
         height: 16px;
         width: 50%;
         right: -16px;
-        border-top: 2px solid #f2f2f2;
+        border-top: 1px solid #c1c1c1;
     }
 
 .NE-arrow-blue {
@@ -193,8 +193,6 @@ button:active {
     position: relative;
     padding: 30px;
     padding-bottom: 45px;
-    margin-top: 30px;
-    margin-bottom: 30px;
     border: 1px solid #eee;
     border-left-width: 0px;
     border-right-width: 0px;
@@ -238,6 +236,13 @@ button:active {
         vertical-align: top;
         width: 20px;
     }
+
+.NE-letter-icon {
+    position: absolute;
+    left: -80px;
+    margin-top: 12px;
+    font-size: 50px;
+}
 
 
 #NE-main-container {

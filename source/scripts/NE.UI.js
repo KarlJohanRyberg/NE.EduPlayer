@@ -289,7 +289,7 @@ NE.UI = (function () {
             var currentPage = NE.Navigation.CurrentPageDiv();
             var currentChapter = NE.Navigation.CurrentChapterDiv();
             var scroller = $('#' + NE.Constants.SCROLL_CONTAINER_ID);
-       
+           
             scroller.animate({ 'scrollTop': '+=' + (currentChapter.position().top + currentPage.position().top - _topMenuOffset) }, animTime, function () {
                 NE.UI.AcceptScrollEvent = true;
             });

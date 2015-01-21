@@ -22,12 +22,16 @@
     color: #959595;
 }
 
-.darkergray {
+.darkgrey {
     color: #c1c1c1;
 }
 
-.darkgrey {
+.darkergray {
     color: #808080;
+}
+
+.darkestgrey {
+    color: #303030;
 }
 
 .light {
@@ -43,37 +47,50 @@
 }
 
 body, p, li {
+    color: black;
     font-weight: 400;
-    font-size: 17px;
-    line-height: 24px;
+    font-size: 19px;
+    line-height: 28px;
 }
 
+.NE-x-small-header {
+    font-size: 19px;
+    line-height: 28px;
+}
 
-.NE-medium-header {
+.NE-small-header {
     font-size: 23px;
     line-height: 34px;
 }
 
-.NE-large-header {
-    font-size: 28px;
-    line-height: 36px;
-}
-
-.NE-x-large-header {
+.NE-medium-header {
     font-size: 32px;
     line-height: 45px;
 }
+
+.NE-large-header {
+    font-size: 36px;
+    line-height: 50px;
+}
+
+.NE-x-large-header {
+    font-size: 45px;
+    line-height: 60px;
+}
+
+
 
 .NE-instruction {
     display: inline-block;
     background-color: #ffa736;
     color: white;
-    padding: 6px;
+    padding: 6px 12px;
 }
 
 .NE-media-caption {
-margin-top: 10px;
-color: #959595;
+    margin-top: 10px;
+    margin-left: 0px;
+    color: #959595;
 }
 
 .NE-letter-text {

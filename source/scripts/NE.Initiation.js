@@ -12,6 +12,10 @@ if (typeof DEBUG === 'undefined') DEBUG = true;
 
 $(window).load(function () {
 
+    console.info('Turning off mock SCORM API logging');
+    NE.API_1484_11.PreventLog = true;
+
+
     if (libCount > 0) {
         for (var i = 0; i < libCount; i++) {
             NE.Net.AddScriptFile(NE.Constants.APPLICATION_BASE_PATH + '/scripts/libraries/' + NE.Constants.LIBRARIES[i], allLibsLoaded);
@@ -42,12 +46,6 @@ function attachEvents() {
     $(window).on('resize', function () {
         NE.EventHandlers.WindowResize();
     });
-
-    /*
-    $(document).on('beforeunload unload', function () {
-        NE.LMS.Exit();
-    });
-    */
 
     $(document).on('beforeunload unload', function() {
         NE.LMS.Exit();
