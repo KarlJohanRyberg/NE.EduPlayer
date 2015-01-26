@@ -112,10 +112,20 @@ NE.Plugin.chapterlist = function (i_params) {
 
                 _myDOMContent = $(data);
                 _addToDOM(_myDOMContent);
+
                 me.OnLoaded();
 
             });
 
+        },
+
+        Update: function () {
+            $('.chapter-link').removeClass('disable');
+            $('.chapter-link').each(function () {
+                var chapterDIv = $('#' + NE.Constants.CHAPTER_ID_PREFIX + parseInt($(this).data('chapter'), 10));
+                if (chapterDIv.hasClass('hidden') || chapterDIv.hasClass('NE-nav-hidden')) $(this).addClass('disable');
+            });
+            
         },
 
         Render: function (params) {

@@ -13,15 +13,13 @@
         top: -83px;
     }
 
-    #NE-top .h3 {
-        color: rgba(0,0,0,0.65);
-        font-weight: normal;
-        padding-top: 1px;
+    #NE-top .course-title {
+       line-height: 21px;
     }
 
     #NE-top li {
         color: #808080;
-        font-size: 21px;
+        font-size: 19px;
     }
 
     #NE-top a:focus {
@@ -85,18 +83,7 @@
 
 
 #NE-top-chapter-navigation.open {
-    border-top: 1px outset #d9d9d9;
-}
-
-.NE-chapterlink.disable {
-    color: #c0c0c0 !important;
-}
-
-.NE-chapterlink:hover.disable {
-    border-left: none !important;
-    padding-left: 0px !important;
-    background-color: transparent !important;
-    cursor: default;
+    border-top: 0px solid #d9d9d9;
 }
 
 

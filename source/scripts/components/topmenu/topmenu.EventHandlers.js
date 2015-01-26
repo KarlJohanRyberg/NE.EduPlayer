@@ -73,6 +73,9 @@ NE.Plugin.topmenu.EventHandlers = (function () {
         });
 
         $('#NE-top-backdrop').fadeTo(0, 0).fadeTo(300, 0.65);
+        
+        NE.UI.DisableContentScroll();
+
         i_item.parent().addClass('active');
 
         var max = parseInt(chapterMenuDiv.css('max-height'));
@@ -83,6 +86,7 @@ NE.Plugin.topmenu.EventHandlers = (function () {
         }
 
         chapterMenuDiv.css({
+            'border-top-width': '1px',
             'height': menuHeight + 'px',
             'overflow': isScroll
         }).toggleClass('open');
@@ -96,9 +100,13 @@ NE.Plugin.topmenu.EventHandlers = (function () {
         $('#NE-top-backdrop').fadeTo(300, 0, function () {
             $(this).hide();
             i_item.parent().removeClass('active');
+            NE.UI.EnableContentScroll();
         });
         var chapterMenuDiv = $('#NE-top-chapter-navigation');
-        chapterMenuDiv.css('height', '0px').toggleClass('open');
+        chapterMenuDiv.css({
+            'border-top-width': '0px',
+            'height': '0px'
+        }).toggleClass('open');
         NE.UI.ToggleBackNavButtons(true);
         NE.UI.ToggleForwardNavButtons(true);
     }
@@ -151,13 +159,21 @@ NE.Plugin.topmenu.EventHandlers = (function () {
             }
             i_item.blur();
         },
-        
+
         ChapterLinkClick: function (i_item) {
             if (i_item.hasClass('disable')) return;
             var chapterIndex = parseInt(i_item.data('chapter'), 10);
+            var chapterDiv = $('#' + NE.Constants.CHAPTER_ID_PREFIX + chapterIndex);
+         
+            if (chapterDiv.hasClass('hidden') || chapterDiv.hasClass('NE-nav-hidden')) return;
+            
+            
+            NE.UI.EnableContentScroll();
             NE.Navigation.ToChapter(chapterIndex);
             NE.UI.ScrollToPage();
+
             $('.NE-chapter-label').click();
+
         },
 
         OverlayClick: function () {
@@ -166,9 +182,7 @@ NE.Plugin.topmenu.EventHandlers = (function () {
 
         UpdateChapterMenu: function () {
             var menuIitem = $('.NE-chapterlink-' + NE.Navigation.CurrentChapterIndex).first();
-            $('.NE-chapterlink').removeClass('disable');
-            menuIitem.addClass('disable');
-            if (menuIitem.length) $('#NE-chapter-label-big').html(menuIitem.html() + NE.Constants.HEADER_CHAPTER_NAV_ICON);
+            if (menuIitem.length) $('#NE-chapter-label-big').html(menuIitem.find('.link-label').first().html() + NE.Constants.HEADER_CHAPTER_NAV_ICON);
         },
 
         eof: null

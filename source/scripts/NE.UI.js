@@ -291,6 +291,7 @@ NE.UI = (function () {
             var scroller = $('#' + NE.Constants.SCROLL_CONTAINER_ID);
            
             scroller.animate({ 'scrollTop': '+=' + (currentChapter.position().top + currentPage.position().top - _topMenuOffset) }, animTime, function () {
+                NE.EventHandlers.AfterPageScroll();
                 NE.UI.AcceptScrollEvent = true;
             });
 
@@ -301,6 +302,20 @@ NE.UI = (function () {
             var scroller = $('#' + NE.Constants.SCROLL_CONTAINER_ID);
             $('#NE-scroll-hint').removeClass('hidden').addClass('active');
             _scrollHintAnimate(scroller, scroller.scrollTop());
+        },
+
+        EnableContentScroll: function () {
+            $('#' + NE.Constants.SCROLL_CONTAINER_ID).css({
+                'overflow-y': 'auto',
+                '-webkit-overflow-scrolling': 'touch'
+            });
+        },
+
+        DisableContentScroll: function () {
+            $('#' + NE.Constants.SCROLL_CONTAINER_ID).css({
+                'overflow-y': 'hidden',
+                '-webkit-overflow-scrolling': 'hidden'
+            });
         },
 
         eof: null

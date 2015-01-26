@@ -1,11 +1,11 @@
 ﻿@media (max-width: 768px) {
 
-   .NE-chapterlink-collection {
+    .NE-chapterlink-collection {
         padding-bottom: 0px;
         margin-bottom: 0px;
     }
 
-       .NE-chapterlink-collection .list-group-item:last-child {
+        .NE-chapterlink-collection .list-group-item:last-child {
             border-bottom: 1px solid #ccc !important;
         }
 
@@ -16,9 +16,25 @@
         .NE-chapterlink-collection.last-item {
             padding-bottom: 30px;
         }
-
 }
 
-.NE-chapterlink{
-    font-size: 21px;
+
+.panel .list-group a.list-group-item.chapter-link {
+    font-size: 19px;
+    color: ##18bdd4;
 }
+
+    .panel .list-group a.list-group-item.chapter-link.disable {
+        color: #808080;
+        border-left: none !important;
+        padding-left: 0px !important;
+        background-color: transparent !important;
+        cursor: default;
+    }
+
+        .panel .list-group a.list-group-item.chapter-link.disable:before {
+            content: '\f023';
+            font-family: FontAwesome;
+           padding-right: 15px;
+           padding-top: 6px;
+        }

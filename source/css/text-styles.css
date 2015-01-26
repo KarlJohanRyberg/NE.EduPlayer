@@ -1,4 +1,43 @@
-﻿.white {
+﻿.NE-instruction {
+    display: inline-block;
+    background-color: #ffa736;
+    color: white;
+    padding: 0px 6px;
+    font-size: 16px;
+}
+
+.NE-info-header {
+    display: block;
+    background-color: black;
+    color: white;
+    padding: 6px 15px;
+}
+
+.NE-media-caption {
+    margin-top: 10px;
+    margin-left: 0px;
+    padding-left: 0px;
+    color: #959595;
+}
+
+.NE-letter-text {
+    font-family: 'Mercury SSm A','Mercury SSm B',Palatino,'Palatino Linotype','Palatino LT STD',Constantia,'Times New Roman',serif;
+    font-size: 18px;
+}
+
+    .NE-letter-text h3 {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+
+    .NE-letter-text h2 {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+
+.white {
     color: white;
 }
 
@@ -8,6 +47,10 @@
 
 .green {
     color: #4aaf57;
+}
+
+.yellow {
+    color: #ffa736;
 }
 
 .red {
@@ -77,34 +120,3 @@ body, p, li {
     font-size: 45px;
     line-height: 60px;
 }
-
-
-
-.NE-instruction {
-    display: inline-block;
-    background-color: #ffa736;
-    color: white;
-    padding: 6px 12px;
-}
-
-.NE-media-caption {
-    margin-top: 10px;
-    margin-left: 0px;
-    color: #959595;
-}
-
-.NE-letter-text {
-    font-family: 'Mercury SSm A','Mercury SSm B',Palatino,'Palatino Linotype','Palatino LT STD',Constantia,'Times New Roman',serif;
-    font-size: 18px;
-}
-
-    .NE-letter-text h3 {
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-
-    .NE-letter-text h2 {
-        font-size: 26px;
-        font-weight: bold;
-    }

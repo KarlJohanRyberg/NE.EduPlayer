@@ -7,18 +7,18 @@
 if (NE === null || NE === undefined) { var NE = {}; }
 if (NE.Plugin === null || NE.Plugin === undefined) { NE.Plugin = {}; }
 
-NE.Plugin.assessment = function(i_params) {
+NE.Plugin.knowledgetest = function(i_params) {
 
     var _params = i_params;
     var _settings = {};
     var _myDOMContent;
     var _numComponents = 0;
     var _componentsLoaded = 0;
-    var _assessmentdata = null;
+    var _knowledgetestdata = null;
     var _openFeedback;
 
     //////////////////////
-    //  Initiation 
+    //  Initiation   
     /////////////////////
 
     (function() {
@@ -34,7 +34,7 @@ NE.Plugin.assessment = function(i_params) {
 
     function _onComplete() {
         _adjustButtons();
-        $('#' + _settings.ID).on('click', '.NE-assessment-option-button', function() {
+        $('#' + _settings.ID).on('click', '.NE-knowledgetest-option-button', function() {
             _onButtonClick($(this));
         });
         me.OnLoaded();
@@ -56,24 +56,10 @@ NE.Plugin.assessment = function(i_params) {
     function _onButtonClick(i_sender) {
         _toggleButtons(i_sender);
 
-        // Lock the question buttons...
-
-        var button_list = i_sender.parent().parent().find('.NE-assessment-option-button');
-
-        button_list.bind("click", function() {
-            return false;
-        });
-        button_list.css("cursor", "not-allowed");
-        
-        // i_sender.parent().parent().find('.NE-assessment-option-button').off("Lock me");
-        i_sender.parent().parent().find('.NE-assessment-option-button').bind("click", function() {
-            // alert("The quick brown fox jumps over the lazy dog.");
-        });
-
         // console.clear();
         // Try set the  response..
-        // TODO Move NE.AssessmentsResult-stuff to another place?
-        var resultObj = window['NE.AssessmentsResult'] || [];
+        // TODO Move NE.knowledgetestsResult-stuff to another place?
+        var resultObj = window['NE.knowledgetestsResult'] || [];
 
         var interactionkey = i_sender.data('interactionkey');
 
@@ -107,16 +93,16 @@ NE.Plugin.assessment = function(i_params) {
                     break;
                 }
             }
-
+            
             resultObj[insertAtIndex] = interactionData;
-
-            window['NE.AssessmentsResult'] = resultObj;
+            
+            window['NE.knowledgetestsResult'] = resultObj;
         }
 
         /*
-        if (_assessmentdata.instantFeedback === false) {
-        _onAfterOption(i_sender);
-        return;
+        if (_knowledgetestdata.instantFeedback === false) {
+            _onAfterOption(i_sender);
+            return;
         }
         */
 
@@ -126,14 +112,14 @@ NE.Plugin.assessment = function(i_params) {
     }
 
     function _onAfterOption(i_sender) {
-        if (_assessmentdata.autoSubmit) {
+        if (_knowledgetestdata.autoSubmit) {
             me.OnSubmit(i_sender);
         }
     }
 
     function _toggleButtons(i_sender) {
         // alert(_settings.ID); 
-        $('.NE-assessment-option-button', '#' + _settings.ID).removeClass('active');
+        $('.NE-knowledgetest-option-button', '#' + _settings.ID).removeClass('active');
         i_sender.addClass('active');
     }
 
@@ -189,7 +175,7 @@ NE.Plugin.assessment = function(i_params) {
         var row = [];
         var rowCount = 0;
 
-        $('.NE-assessment-option-button', '#' + _settings.ID).each(function(i) {
+        $('.NE-knowledgetest-option-button', '#' + _settings.ID).each(function(i) {
 
             var h = $(this).outerHeight();
             highst = h > highst ? h : highst;
@@ -224,9 +210,9 @@ NE.Plugin.assessment = function(i_params) {
         //
         /////////////////////
 
-        Name: 'assessment',
+        Name: 'knowledgetest',
         Dependencies: [
-            'assessment.css'
+            'knowledgetest.css'
         ],
 
         //////////////////////
@@ -245,11 +231,11 @@ NE.Plugin.assessment = function(i_params) {
 
                 NE.Net.LoadJsonFile(_settings.datafile, function(jsonData) {
 
-                    _assessmentdata = jsonData;
+                    _knowledgetestdata = jsonData;
 
                     NE.Plugin.ApplyTemplate(me, function(data) {
 
-                        _myDOMContent = $(data.replace(/{assessmentID}/g, _settings.ID));
+                        _myDOMContent = $(data.replace(/{knowledgetestID}/g, _settings.ID));
                         _addToDOM(_myDOMContent);
                         _onComplete();
 
@@ -267,25 +253,26 @@ NE.Plugin.assessment = function(i_params) {
 
         Render: function(params) {
 
-            var assessmentId = _assessmentdata.id,
+            var knowledgetestId = _knowledgetestdata.id,
                 questionIndex,
                 currentQuestion,
                 optionIndex,
                 currentOption,
                 feedbackIndex,
-                currentFeedback;
+                currentFeedback,
+                fbData;
 
             var returnVal = '';
 
-            if (_assessmentdata.title !== '' || _assessmentdata.introContent !== '') {
-                returnVal += params[0].data.replace(/{title}/g, _assessmentdata.title).replace(/{introContent}/g, _assessmentdata.introContent);
+            if (_knowledgetestdata.title !== '' || _knowledgetestdata.introContent !== '') {
+                returnVal += params[0].data.replace(/{title}/g, _knowledgetestdata.title).replace(/{introContent}/g, _knowledgetestdata.introContent);
             }
 
-            for (questionIndex = 0; questionIndex < _assessmentdata.questions.length; questionIndex++) {
-                currentQuestion = _assessmentdata.questions[questionIndex];
+            for (questionIndex = 0; questionIndex < _knowledgetestdata.questions.length; questionIndex++) {
+                currentQuestion = _knowledgetestdata.questions[questionIndex];
 
                 if (currentQuestion.title !== '' || currentQuestion.introContent !== '') {
-                    returnVal += params[1].data.replace(/{title}/g, currentQuestion.title).replace(/{introContent}/g, currentQuestion.introContent);
+                    returnVal += params[1].data.replace(/{title}/g, currentQuestion.title).replace(/{introContent}/g, currentQuestion.introContent || '');
                 }
 
                 returnVal += params[2].data;
@@ -298,36 +285,45 @@ NE.Plugin.assessment = function(i_params) {
                         classes += ' toggle';
                     }
                     optData = optData.replace(/{content}/g, currentOption.content);
-                    optData = optData.replace(/{answerData}/g, currentOption.answerData);
-                    // optData = optData.replace(/{assessmentId}/g, assessmentId);
-                    // optData = optData.replace(/{questionIndex}/g, questionIndex);
+                    optData = optData.replace(/{answerData}/g, currentOption.answerData || currentOption.content);
                     optData = optData.replace(/{feedbackIndex}/g, currentOption.feedbackIndex);
                     optData = optData.replace(/{reportingResult}/g, currentOption.reports);
                     optData = optData.replace(/{optionButtonClasses}/g, classes);
 
                     returnVal += optData;
+
+                    if (currentOption.feedback) {
+                        for (feedbackIndex = 0; feedbackIndex < currentOption.feedback.length; feedbackIndex++) {
+                            currentFeedback = currentOption.feedback[feedbackIndex];
+                            fbData = params[4].data;
+                            fbData = fbData.replace(/{content}/g, currentFeedback.content);
+                            fbData = fbData.replace(/{mood}/g, currentFeedback.mood);
+                            fbData = fbData.replace(/{feedbackIndex}/g, feedbackIndex);
+                            returnVal += fbData;
+                        }
+                    }
                 }
 
-                for (feedbackIndex = 0; feedbackIndex < currentQuestion.feedback.length; feedbackIndex++) {
-                    currentFeedback = currentQuestion.feedback[feedbackIndex];
-                    var fbData = params[4].data;
-                    fbData = fbData.replace(/{content}/g, currentFeedback.content);
-                    fbData = fbData.replace(/{mood}/g, currentFeedback.mood);
-                    // fbData = fbData.replace(/{assessmentId}/g, assessmentId);
-                    // fbData = fbData.replace(/{questionIndex}/g, questionIndex);
-                    fbData = fbData.replace(/{feedbackIndex}/g, feedbackIndex);
-                    returnVal += fbData;
+                if (currentQuestion.feedback) {
+                    for (feedbackIndex = 0; feedbackIndex < currentQuestion.feedback.length; feedbackIndex++) {
+                        currentFeedback = currentQuestion.feedback[feedbackIndex];
+                        fbData = params[4].data;
+                        fbData = fbData.replace(/{content}/g, currentFeedback.content);
+                        fbData = fbData.replace(/{mood}/g, currentFeedback.mood);
+                        fbData = fbData.replace(/{feedbackIndex}/g, feedbackIndex);
+                        returnVal += fbData;
+                    }
                 }
 
-                returnVal = returnVal.replace(/{reportingWeighting}/g, _assessmentdata.reporting.weighting);
-                returnVal = returnVal.replace(/{reportingId}/g, _assessmentdata.reporting.id);
-                returnVal = returnVal.replace(/{reportingDescription}/g, _assessmentdata.reporting.description);
+                returnVal = returnVal.replace(/{reportingWeighting}/g, currentQuestion.reporting.weighting);
+                returnVal = returnVal.replace(/{reportingId}/g, currentQuestion.reporting.id);
+                returnVal = returnVal.replace(/{reportingDescription}/g, currentQuestion.reporting.description || currentQuestion.title);
                 returnVal = returnVal.replace(/{questionIndex}/g, questionIndex);
 
                 returnVal += params[5].data;
             }
 
-            returnVal = returnVal.replace(/{assessmentId}/g, assessmentId);
+            returnVal = returnVal.replace(/{knowledgetestId}/g, knowledgetestId);
 
             return returnVal;
         },

@@ -86,6 +86,7 @@ button:active {
     background-color: #808080;
 }
 
+
 .NE-arrow-white {
     background-image: url('../images/arrow-white.png');
     background-position: center -16px;
@@ -188,6 +189,13 @@ button:active {
         .NE-checklist-panel li.checked:before {
             color: #ff612f;
         }
+
+.NE-checklist-panel.slim {
+    border-width: 0px;
+    padding: 0px 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
 .NE-info-panel {
     position: relative;
@@ -298,15 +306,19 @@ button:active {
     animation-timing-function: ease-in-out;
 }
 
-.NE-bg-big-image {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
+.NE-bg-cover {
     background-size: cover;
-    background-position: top right;
+    background-position: center center;
 }
+
+    .NE-bg-cover.bottom {
+        background-position-y: bottom;
+    }
+
+    .NE-bg-cover.top {
+        background-position-y: top;
+    }
+
 
 .NE-image-overlay {
     background-color: rgba(255,255,255,0.9);

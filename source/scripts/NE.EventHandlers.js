@@ -111,13 +111,17 @@ NE.EventHandlers = (function () {
             NE.UI.AcceptScrollEvent = false;
 
             $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'hidden');
+            NE.UI.DisableContentScroll();
+
             clearTimeout(_resizeTimer);
             _resizeTimer = setTimeout(function () {
                 $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
-                $('#' + NE.Constants.SCROLL_CONTAINER_ID).css('overflow', 'hidden');
+             
+                NE.UI.EnableContentScroll();
+
                 NE.UI.ScrollToPage(true);
                 NE.UI.SwitchTopMenu();
-                $('#' + NE.Constants.SCROLL_CONTAINER_ID).css('overflow', 'scroll');
+
             }, 500);
         },
 
@@ -146,6 +150,8 @@ NE.EventHandlers = (function () {
             });
 
             $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
+ 
+            NE.Plugin['NE-top-chapter-navigation'].Update();
 
             NE.SCORM.NavigateToBookmark();
 
@@ -218,10 +224,17 @@ NE.EventHandlers = (function () {
 
         },
 
+        AfterPageScroll: function () {
+            NE.Plugin['NE-top-chapter-navigation'].Update();
+        },
+
         ChapterLinkCLick: function (i_item, e) {
             if (i_item.hasClass('disable')) return;
 
             var chapterIndex = parseInt(i_item.data('chapter'), 10);
+            var chapterDIv = $('#' + NE.Constants.CHAPTER_ID_PREFIX + chapterIndex);
+            if (chapterDIv.hasClass('hidden') || chapterDIv.hasClass('NE-nav-hidden')) return;
+
             NE.Navigation.ToChapter(chapterIndex);
             NE.UI.ScrollToPage();
         },

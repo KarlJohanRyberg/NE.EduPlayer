@@ -103,8 +103,7 @@ NE.Plugin.topmenu = function (i_params) {
                         NE.Plugin.topmenu.EventHandlers.ChapterLabelClick($(this));
                     });
 
-
-                    $('.NE-chapterlink').on('click', function () {
+                    $('#' + _myDOMContent.first().attr('id')).on('click', '.NE-chapterlink', function () {
                         NE.Plugin.topmenu.EventHandlers.ChapterLinkClick($(this));
                     });
 
