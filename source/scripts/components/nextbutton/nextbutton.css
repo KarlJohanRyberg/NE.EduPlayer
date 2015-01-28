@@ -1,6 +1,6 @@
 ﻿.NE-next-button {
-    -webkit-transition: color 0.2s linear, background-color 0.2s linear !important;
-    transition: color 0.2s linear, background-color 0.2s linear !important;
+    -webkit-transition: color 0.2s linear, background-color 0.2s linear, height 0.3s linear !important;
+    transition: color 0.2s linear, background-color 0.2s linear, height 0.3s linear !important;
 }
 
     .NE-next-button .icon {
@@ -17,10 +17,4 @@
     }
 
     .NE-next-button.open {
-    }
-
-    .NE-next-button.active {
-        margin-top: 25px;
-        padding: 0px 40%;
-        height: 0px;
     }

@@ -80,7 +80,7 @@ NE.Plugin.verticalnav = function (i_params) {
                 }
             });
         });
-
+    
         $('.NE-eq-height', panelSelector).each(function () {
             var orgHeight = $(this).outerHeight();
             $(this).data('orgHeight', orgHeight);
@@ -96,7 +96,6 @@ NE.Plugin.verticalnav = function (i_params) {
         if (tallest > 0) {
             $('.NE-eq-height', panelSelector).each(function () {
                 var padding = tallest - $(this).data('orgHeight');
-            
                 $(this).find('.NE-eq-height-padder').css('height', padding + 'px');
             });
         }
@@ -274,7 +273,7 @@ NE.Plugin.verticalnav = function (i_params) {
             });
 
             NE.Plugin.verticalnav.EventHandlers.NavTo(me);
-
+      
             _eqHeightCols();
         },
 

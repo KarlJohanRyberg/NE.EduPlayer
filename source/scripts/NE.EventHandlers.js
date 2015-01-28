@@ -107,7 +107,11 @@ NE.EventHandlers = (function () {
             }
         },
 
-        WindowResize: function () {
+        WindowResize: function (e) {
+
+            var focusTagName = $(':focus') && $(':focus').prop("tagName") ? $(':focus').prop("tagName").toUpperCase() : '';
+            if (focusTagName == 'TEXTAREA' || focusTagName == 'INPUT') return;
+
             NE.UI.AcceptScrollEvent = false;
 
             $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'hidden');
@@ -116,7 +120,7 @@ NE.EventHandlers = (function () {
             clearTimeout(_resizeTimer);
             _resizeTimer = setTimeout(function () {
                 $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
-             
+
                 NE.UI.EnableContentScroll();
 
                 NE.UI.ScrollToPage(true);
@@ -132,9 +136,9 @@ NE.EventHandlers = (function () {
             NE.UI.AcceptScrollEvent = false;
             NE.SCORM.RegisterSections();
 
+            NE.LMS.Sections.SetState(NE.CourseTree.SCO_name + '_0', 'completed');
+
             NE.UI.PreHide();
-
-
             NE.SCORM.Unlockhistory();
 
 
@@ -149,11 +153,13 @@ NE.EventHandlers = (function () {
                 swDocument: '#' + NE.Constants.SCROLL_CONTAINER_ID
             });
 
-            $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
- 
+    
             NE.Plugin['NE-top-chapter-navigation'].Update();
+            $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
 
             NE.SCORM.NavigateToBookmark();
+
+            NE.UI.Ready();
 
         },
 
@@ -164,14 +170,18 @@ NE.EventHandlers = (function () {
             var pageIndex = parseInt(i_item.data('index'), 10);
             var chapterIndex = parseInt(i_item.data('chapter'), 10);
 
-            if (scrollObj.visibility > 0.8 && pageIndex == NE.CourseTree.chapters[chapterIndex].pages.length - 1) {
+            var ismostVisible = scrollObj.visibility > 0.8;
+            var isNewPage = i_item.attr('id') != NE.Navigation.CurrentPageDiv().attr('id');
+            var isLastPage = pageIndex == NE.CourseTree.chapters[chapterIndex].pages.length - 1;
+
+            if (ismostVisible && isNewPage && isLastPage) {
                 var sectionID = NE.CourseTree.SCO_name + '_' + chapterIndex;
                 NE.LMS.Sections.SetState(sectionID, 'completed');
             }
 
             if (!NE.UI.AcceptScrollEvent) return;
 
-            if (scrollObj.visibility > 0.8 && i_item.attr('id') != NE.Navigation.CurrentPageDiv().attr('id')) {
+            if (ismostVisible && isNewPage) {
 
                 NE.Navigation.CurrentChapterIndex = chapterIndex;
                 NE.Navigation.CurrentPageIndex = pageIndex;
@@ -185,7 +195,7 @@ NE.EventHandlers = (function () {
                         NE.LMS.Bookmark.SetBookmark(i_item.attr('id'));
                         NE.UI.SetNavigationButtons();
                     }
-                });
+                }, 300);
 
             }
 
@@ -222,6 +232,8 @@ NE.EventHandlers = (function () {
                 NE.LMS.Bookmark.SetBookmark(NE.Navigation.CurrentPageDiv().attr('id'));
             }
 
+            NE.Plugin['NE-top-chapter-navigation'].Update();
+
         },
 
         AfterPageScroll: function () {
@@ -229,14 +241,20 @@ NE.EventHandlers = (function () {
         },
 
         ChapterLinkCLick: function (i_item, e) {
-            if (i_item.hasClass('disable')) return;
+            if (i_item.hasClass('disable') || i_item.hasClass('current')) return;
 
             var chapterIndex = parseInt(i_item.data('chapter'), 10);
             var chapterDIv = $('#' + NE.Constants.CHAPTER_ID_PREFIX + chapterIndex);
-            if (chapterDIv.hasClass('hidden') || chapterDIv.hasClass('NE-nav-hidden')) return;
+            //  if (chapterDIv.hasClass('hidden') || chapterDIv.hasClass('NE-nav-hidden')) return;
+
+            for (var i = NE.Navigation.CurrentChapterIndex; i < chapterIndex; i++) {
+                NE.UI.Unlock(i);
+            }
+            NE.UI.Unlock(chapterIndex, 0);
 
             NE.Navigation.ToChapter(chapterIndex);
             NE.UI.ScrollToPage();
+
         },
 
         KeyUp: function (e) {

@@ -40,6 +40,10 @@ NE.UI = (function () {
     var _scrollHintDismissed = false;
     var _hintTImer = null;
 
+    var _onUIReadyKey = 'a716ed95-dc66-468f-9802-a2203494a7f5';
+    var _eventOwnerKey = Math.random() + '' + Math.random();
+
+
     //////////////////////
     //
     //  Initiation
@@ -48,7 +52,7 @@ NE.UI = (function () {
 
     (function () {
 
-
+        NE.Events.Register(_eventOwnerKey, _onUIReadyKey);
 
     })();
 
@@ -121,6 +125,7 @@ NE.UI = (function () {
         //
         /////////////////////
 
+        ON_READY: _onUIReadyKey,
         AcceptScrollEvent: false,
 
         //////////////////////
@@ -131,7 +136,7 @@ NE.UI = (function () {
 
         Setup: function () {
             if (!_scrollHintDismissed) {
-                _hintTImer = setTimeout(NE.UI.ScrollHint, 5000);
+                // _hintTImer = setTimeout(NE.UI.ScrollHint, 5000);
             }
             $('#' + NE.Constants.FLOATING_HEADER_ID).css('right', _getScrollbarWidth() + 'px');
             $('#NE-top-backdrop').css('right', _getScrollbarWidth() + 'px');
@@ -159,6 +164,10 @@ NE.UI = (function () {
                 }
             });
 
+        },
+
+        Ready: function () {
+            NE.Events.Execute(_eventOwnerKey, _onUIReadyKey, {});
         },
 
         HideVIsitedItems: function (i_chapter, i_page) {
@@ -193,11 +202,13 @@ NE.UI = (function () {
                     var pageAndAfter = i_page !== undefined && (j > i_page || i > i_chapter);
  
                     if (page.stopprogress && (onlyChapterButAfter || pageAndAfter)) {
+                        if (oneVisible) $('#NE-chapter-' + i).removeClass('NE-nav-hidden');
                         return;
                     }
                     if (NE.CourseTree.chapters[i].pages[j].keepprogress !== false) {
-                
+ 
                         $('#NE-page-' + i + '-' + j).removeClass('NE-nav-hidden');
+                        $('#NE-page-' + i + '-' + j).find('.NE-nav-hidden').removeClass('NE-nav-hidden');
                     }
                     oneVisible = true;
                 }

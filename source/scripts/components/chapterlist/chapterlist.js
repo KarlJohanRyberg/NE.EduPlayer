@@ -120,21 +120,26 @@ NE.Plugin.chapterlist = function (i_params) {
         },
 
         Update: function () {
-            $('.chapter-link').removeClass('disable');
-            $('.chapter-link').each(function () {
-                var chapterDIv = $('#' + NE.Constants.CHAPTER_ID_PREFIX + parseInt($(this).data('chapter'), 10));
-                if (chapterDIv.hasClass('hidden') || chapterDIv.hasClass('NE-nav-hidden')) $(this).addClass('disable');
-            });
-            
+            $('.chapter-link').removeClass('disable current');
+
+            $('.NE-chapterlink-' + NE.Navigation.CurrentChapterIndex).addClass('current');
+            var ran = Math.random();
+            var nextLocked = false;
+
+            for (var i = 0; i < NE.CourseTree.chapters.length; i++) {
+                if (NE.CourseTree.chapters[i].properties.locked === true) nextLocked = true;
+                if (nextLocked === true) $('.NE-chapterlink-' + i).addClass('disable');
+            }
+
         },
 
         Render: function (params) {
-      
+
             var renderChapters = [];
 
-            for(var k = 0; k < NE.CourseTree.chapters.length; k++){
+            for (var k = 0; k < NE.CourseTree.chapters.length; k++) {
                 var chapter = NE.CourseTree.chapters[k];
-                if(chapter.properties.displayInMenu !== false){
+                if (chapter.properties.displayInMenu !== false) {
                     renderChapters.push(chapter);
                 }
             }

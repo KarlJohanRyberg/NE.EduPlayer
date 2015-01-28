@@ -43,8 +43,8 @@ function attachEvents() {
 
     NE.Net.AddScriptFile(NE.Constants.CONTENT_BASE_PATH + '/content/structure/courseTree.js', NE.EventHandlers.StructureLoaded);
 
-    $(window).on('resize', function () {
-        NE.EventHandlers.WindowResize();
+    $(window).on('resize', function (e) {
+        NE.EventHandlers.WindowResize(e);
     });
 
     $(document).on('beforeunload unload', function() {

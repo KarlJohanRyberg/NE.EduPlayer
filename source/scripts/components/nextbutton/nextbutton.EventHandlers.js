@@ -87,8 +87,6 @@ NE.Plugin.nextbutton.EventHandlers = (function () {
             var parentToHide = that.closest('.NE-hidden-visited').first();
             if (parentToHide.length > 0) {
 
-                that.addClass('active');
-
                 parentToHide.slideUp(300, function () {
                     parentToHide.addClass('hidden');
                 });

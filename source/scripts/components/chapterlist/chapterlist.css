@@ -21,7 +21,7 @@
 
 .panel .list-group a.list-group-item.chapter-link {
     font-size: 19px;
-    color: ##18bdd4;
+    /*color: #18bdd4;*/
 }
 
     .panel .list-group a.list-group-item.chapter-link.disable {
@@ -35,6 +35,14 @@
         .panel .list-group a.list-group-item.chapter-link.disable:before {
             content: '\f023';
             font-family: FontAwesome;
-           padding-right: 15px;
-           padding-top: 6px;
+            padding-right: 15px;
+            padding-top: 6px;
         }
+
+    .panel .list-group a.list-group-item.chapter-link.current {
+        color: #808080;
+        border-left: none !important;
+        padding-left: 0px !important;
+        background-color: transparent !important;
+        cursor: default;
+    }

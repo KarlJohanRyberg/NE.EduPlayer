@@ -105,6 +105,7 @@ NE.SCORM = (function () {
         NavigateToBookmark: function () {
 
             this.InitBookmark = NE.LMS.Bookmark.GetBookmark();
+
             if (this.InitBookmark) {
                 var visitItem = $('#' + this.InitBookmark);
 
@@ -113,6 +114,9 @@ NE.SCORM = (function () {
 
                 NE.Navigation.ToPage(NE.Navigation.CurrentPageIndex, NE.Navigation.CurrentChapterIndex);
 
+                for (var i = 0; i < NE.Navigation.CurrentChapterIndex; i++) {
+                    NE.CourseTree.chapters[i].properties.locked = false;
+                }
 
                 NE.UI.Unlock(NE.Navigation.CurrentChapterIndex, NE.Navigation.CurrentPageIndex);
 

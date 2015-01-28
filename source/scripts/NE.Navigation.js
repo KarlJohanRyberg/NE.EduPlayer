@@ -97,6 +97,7 @@ NE.Navigation = (function () {
 
         ToChapter: function (index, preventNav) {
             if (index < 0 || index >= NE.CourseTree.chapters.length) return;
+            NE.CourseTree.chapters[index].properties.locked = false;
             NE.Navigation.CurrentChapterIndex = index;
             if (!preventNav) NE.Navigation.ToPage(0);
         },
@@ -152,6 +153,7 @@ NE.Navigation = (function () {
             if (page >= NE.CourseTree.chapters[NE.Navigation.CurrentChapterIndex].pages.length) {
                 if (NE.Navigation.CurrentChapterIndex >= NE.CourseTree.chapters.length - 1) return;
                 NE.Navigation.CurrentChapterIndex += 1;
+                NE.CourseTree.chapters[NE.Navigation.CurrentChapterIndex].properties.locked = false;
                 page = 0;
             }
             NE.Navigation.ToPage(page);
@@ -162,6 +164,7 @@ NE.Navigation = (function () {
             if (page < 0) {
                 if (NE.Navigation.CurrentChapterIndex < 1) return;
                 NE.Navigation.CurrentChapterIndex -= 1;
+                NE.CourseTree.chapters[NE.Navigation.CurrentChapterIndex].properties.locked = false;
                 page = NE.CourseTree.chapters[NE.Navigation.CurrentChapterIndex].pages.length - 1;
             }
             NE.Navigation.ToPage(page);

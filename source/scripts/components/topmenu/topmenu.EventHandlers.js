@@ -161,14 +161,20 @@ NE.Plugin.topmenu.EventHandlers = (function () {
         },
 
         ChapterLinkClick: function (i_item) {
-            if (i_item.hasClass('disable')) return;
+            if (i_item.hasClass('disable') || i_item.hasClass('current')) return;
             var chapterIndex = parseInt(i_item.data('chapter'), 10);
             var chapterDiv = $('#' + NE.Constants.CHAPTER_ID_PREFIX + chapterIndex);
          
-            if (chapterDiv.hasClass('hidden') || chapterDiv.hasClass('NE-nav-hidden')) return;
+          // if (chapterDiv.hasClass('hidden') || chapterDiv.hasClass('NE-nav-hidden')) return;
             
             
             NE.UI.EnableContentScroll();
+
+            for (var i = NE.Navigation.CurrentChapterIndex; i < chapterIndex; i++) {
+                NE.UI.Unlock(i);
+            }
+            NE.UI.Unlock(chapterIndex, 0);
+
             NE.Navigation.ToChapter(chapterIndex);
             NE.UI.ScrollToPage();
 
