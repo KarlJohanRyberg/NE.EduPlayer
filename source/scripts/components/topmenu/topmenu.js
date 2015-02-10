@@ -113,6 +113,10 @@ NE.Plugin.topmenu = function (i_params) {
 
                     NE.Events.Add(NE.Navigation.ON_NAVIGATION, NE.Plugin.topmenu.EventHandlers.UpdateChapterMenu);
 
+                    if ($('.NE-chapterlink', '#NE-top-chapter-navigation').length < 1) {
+                        $('.NE-chapter-label', '#NE-top').remove();
+                    }
+
                 });
 
             });

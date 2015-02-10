@@ -120,9 +120,8 @@ NE.Plugin.chapterlist = function (i_params) {
         },
 
         Update: function () {
-            $('.chapter-link').removeClass('disable current');
+            $('.chapter-link').removeClass('disable');
 
-            $('.NE-chapterlink-' + NE.Navigation.CurrentChapterIndex).addClass('current');
             var ran = Math.random();
             var nextLocked = false;
 

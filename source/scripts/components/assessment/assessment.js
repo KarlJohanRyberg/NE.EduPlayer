@@ -7,7 +7,7 @@
 if (NE === null || NE === undefined) { var NE = {}; }
 if (NE.Plugin === null || NE.Plugin === undefined) { NE.Plugin = {}; }
 
-NE.Plugin.assessment = function(i_params) {
+NE.Plugin.assessment = function (i_params) {
 
     var _params = i_params;
     var _settings = {};
@@ -21,7 +21,7 @@ NE.Plugin.assessment = function(i_params) {
     //  Initiation 
     /////////////////////
 
-    (function() {
+    (function () {
 
 
 
@@ -34,7 +34,7 @@ NE.Plugin.assessment = function(i_params) {
 
     function _onComplete() {
         _adjustButtons();
-        $('#' + _settings.ID).on('click', '.NE-assessment-option-button', function() {
+        $('#' + _settings.ID).on('click', '.NE-assessment-option-button', function () {
             _onButtonClick($(this));
         });
         me.OnLoaded();
@@ -60,13 +60,14 @@ NE.Plugin.assessment = function(i_params) {
 
         var button_list = i_sender.parent().parent().find('.NE-assessment-option-button');
 
-        button_list.bind("click", function() {
+        button_list.bind("click", function () {
             return false;
         });
-        button_list.css("cursor", "not-allowed");
-        
+        button_list.css("cursor", "default");
+        button_list.removeClass('hover-blue');
+
         // i_sender.parent().parent().find('.NE-assessment-option-button').off("Lock me");
-        i_sender.parent().parent().find('.NE-assessment-option-button').bind("click", function() {
+        i_sender.parent().parent().find('.NE-assessment-option-button').bind("click", function () {
             // alert("The quick brown fox jumps over the lazy dog.");
         });
 
@@ -120,7 +121,7 @@ NE.Plugin.assessment = function(i_params) {
         }
         */
 
-        _displayFeedback(i_sender, function() {
+        _displayFeedback(i_sender, function () {
             _onAfterOption(i_sender);
         });
     }
@@ -142,18 +143,25 @@ NE.Plugin.assessment = function(i_params) {
         var fbId = i_sender.data('fb');
         var fbArea = $('#' + fbId);
 
+        if (fbArea.length < 1) {
+            _openFeedback = null;
+            if (i_callback) i_callback();
+            return;
+        }
+
         if (_openFeedback) {
             if (_openFeedback.attr('id') == fbArea.attr('id')) return;
             fbArea.parent().css('height', fbArea.parent().outerHeight() + 'px');
-            _openFeedback.fadeOut(300, function() {
-                fbArea.removeClass('hidden').fadeOut(0).fadeIn(300, function() {
+            _openFeedback.fadeOut(300, function () {
+                fbArea.removeClass('hidden').fadeOut(0).fadeIn(300, function () {
                     if (i_callback) i_callback();
                 });
             });
         }
         else {
-            fbArea.removeClass('hidden').slideUp(0).slideDown(300, function() {
-                NE.Scroll.ToElementY(fbArea, 'middle', i_callback);
+            fbArea.removeClass('hidden').slideUp(0).slideDown(300, function () {
+                // NE.Scroll.ToElementY(fbArea, 'middle', i_callback);
+                if (i_callback) i_callback();
             });
         }
 
@@ -189,7 +197,7 @@ NE.Plugin.assessment = function(i_params) {
         var row = [];
         var rowCount = 0;
 
-        $('.NE-assessment-option-button', '#' + _settings.ID).each(function(i) {
+        $('.NE-assessment-option-button', '#' + _settings.ID).each(function (i) {
 
             var h = $(this).outerHeight();
             highst = h > highst ? h : highst;
@@ -235,7 +243,7 @@ NE.Plugin.assessment = function(i_params) {
         //
         /////////////////////
 
-        Init: function() {
+        Init: function () {
 
             _settings = _params.settings;
 
@@ -243,11 +251,11 @@ NE.Plugin.assessment = function(i_params) {
 
             if (_settings.datafile) {
 
-                NE.Net.LoadJsonFile(_settings.datafile, function(jsonData) {
+                NE.Net.LoadJsonFile(_settings.datafile, function (jsonData) {
 
                     _assessmentdata = jsonData;
 
-                    NE.Plugin.ApplyTemplate(me, function(data) {
+                    NE.Plugin.ApplyTemplate(me, function (data) {
 
                         _myDOMContent = $(data.replace(/{assessmentID}/g, _settings.ID));
                         _addToDOM(_myDOMContent);
@@ -265,7 +273,7 @@ NE.Plugin.assessment = function(i_params) {
 
         },
 
-        Render: function(params) {
+        Render: function (params) {
 
             var assessmentId = _assessmentdata.id,
                 questionIndex,
@@ -285,7 +293,18 @@ NE.Plugin.assessment = function(i_params) {
                 currentQuestion = _assessmentdata.questions[questionIndex];
 
                 if (currentQuestion.title !== '' || currentQuestion.introContent !== '') {
-                    returnVal += params[1].data.replace(/{title}/g, currentQuestion.title).replace(/{introContent}/g, currentQuestion.introContent);
+                    var qIntro = params[1].data;
+                    qIntro = qIntro.replace(/{title}/g, currentQuestion.title);
+
+                    if (currentQuestion.introContent !== '') {
+                        qIntro = qIntro.replace(/{introContent}/g, currentQuestion.introContent);
+                        qIntro = qIntro.replace(/{qIntroClass}/g, "NE-info-panel pb-none mt-sm mb-sm");
+                    } else {
+                        qIntro = qIntro.replace(/{introContent}/g, "");
+                        qIntro = qIntro.replace(/{qIntroClass}/g, "hidden");
+                    }
+
+                    returnVal += qIntro;
                 }
 
                 returnVal += params[2].data;
@@ -333,8 +352,8 @@ NE.Plugin.assessment = function(i_params) {
         },
 
 
-        OnLoaded: function(e) { },
-        OnSubmit: function(e) { },
+        OnLoaded: function (e) { },
+        OnSubmit: function (e) { },
 
         eof: null
     };

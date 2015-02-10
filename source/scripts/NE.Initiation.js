@@ -77,7 +77,6 @@ function attachEvents() {
         NE.EventHandlers.ChapterLinkCLick($(this), e);
     });
 
-
     $(document).on('keyup', NE.EventHandlers.KeyUp);
-
+    
 }

@@ -24,8 +24,8 @@
 
     .NE-assessment-option-button.toggle.active {
         color: white;
-        background-color: #c0c0c0;
-        border-color: #808080;
+        background-color: #18bdd4;
+        border-color: #15a9bd;
     }
 
 @media (max-width: 768px) {
@@ -38,7 +38,7 @@
     padding: 30px;
     border: 1px solid #c0c0c0;
     border-radius: 4px;
-} 
+}
 
     .NE-assessment-feedback.negative {
         background-color: #ff9a98;

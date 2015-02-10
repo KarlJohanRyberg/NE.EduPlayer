@@ -6,8 +6,8 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h2>{title}</h2>
-            <p>{introContent}</p>
+            <h2 class="NE-medium-header darkergray">{title}</h2>
+            <div><p>{introContent}</p></div>
         </div>
     </div>
 
@@ -19,8 +19,8 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h2>{title}</h2>
-            <p>{introContent}</p>
+            <h2 class="NE-medium-header darkergray">{title}</h2>
+            <div class="{qIntroClass}"><p>{introContent}</p></div>
         </div>
     </div>
 
@@ -39,11 +39,11 @@
         {param}
 
         <div class="NE-assessment-option-button-holder col-xs-12 col-sm-6 mb-sm">
-            <div class="NE-button white hover-blue NE-assessment-option-button{optionButtonClasses}"
-                data-result="{reportingResult}"
-                data-interactionkey="assessment-{assessmentId}-q-{questionIndex}" 
-                data-answer="{answerData}" 
-                data-fb="assessment-{assessmentId}-q-{questionIndex}-fb-{feedbackIndex}">
+            <div class="NE-button darkwhite hover-blue NE-assessment-option-button{optionButtonClasses}"
+                 data-result="{reportingResult}"
+                 data-interactionkey="assessment-{assessmentId}-q-{questionIndex}"
+                 data-answer="{answerData}"
+                 data-fb="assessment-{assessmentId}-q-{questionIndex}-fb-{feedbackIndex}">
                 <div class="inner-text">
                     {content}
                 </div>
@@ -55,9 +55,11 @@
 
         {param}
         <div id="assessment-{assessmentId}-q-{questionIndex}-fb-{feedbackIndex}" class="NE-assessment-feedback-holder col-xs-12 hidden">
-            <p class="NE-assessment-feedback {mood}">
-                {content}
-            </p>
+            <div class="NE-assessment-feedback {mood}">
+                <p>
+                    {content}
+                </p>
+            </div>
         </div>
         {/param}
 

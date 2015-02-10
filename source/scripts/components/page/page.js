@@ -75,9 +75,10 @@ NE.Plugin.page = function (i_params) {
     }
 
     function _buildPage(i_html) {
-        
+     
         $('#' + NE.Constants.PAGE_ID_PREFIX + _settings.chapterIndex + '-' + _settings.index).html(i_html);
         _numComponents = $('.NE-plugin-container', _myDOMContent.first()).length;
+     
         if (_numComponents > 0) {
             NE.Plugin.LoadAll(_myDOMContent.first(), _onCompnentsLoad);
         }
@@ -87,7 +88,7 @@ NE.Plugin.page = function (i_params) {
     }
 
     function _pageComplete() {
-
+ 
         if (_settings.starthidden === true) {
             _myDOMContent.first().addClass('hidden');
         }
@@ -162,7 +163,7 @@ NE.Plugin.page = function (i_params) {
             fileName = fileName[fileName.length-1];
 
             firstData = firstData.replace(/{datafile}/g, fileName);
-            firstData = firstData.replace(/{pageID}/g, NE.Constants.PAGE_ID_PREFIX + _settings.chapterIndex + '-' + _settings.index);
+            firstData = firstData.replace(/{ID}/g, _settings.ID);
             firstData = firstData.replace(/{initclasses}/g, initClasses);
             firstData = firstData.replace(/{index}/g, _settings.index);
             firstData = firstData.replace(/{chapterIndex}/g, _settings.chapterIndex);

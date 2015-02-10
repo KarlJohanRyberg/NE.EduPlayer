@@ -41,6 +41,7 @@ NE.UI = (function () {
     var _hintTImer = null;
 
     var _onUIReadyKey = 'a716ed95-dc66-468f-9802-a2203494a7f5';
+    var _onPageRevealKey = '872c4ce1-3035-4f58-8ba1-71e436c54ecc';
     var _eventOwnerKey = Math.random() + '' + Math.random();
 
 
@@ -53,6 +54,7 @@ NE.UI = (function () {
     (function () {
 
         NE.Events.Register(_eventOwnerKey, _onUIReadyKey);
+        NE.Events.Register(_eventOwnerKey, _onPageRevealKey);
 
     })();
 
@@ -126,7 +128,9 @@ NE.UI = (function () {
         /////////////////////
 
         ON_READY: _onUIReadyKey,
+        ON_PAGE_REVEAL: _onPageRevealKey,
         AcceptScrollEvent: false,
+        Loaded: false,
 
         //////////////////////
         //
@@ -168,6 +172,7 @@ NE.UI = (function () {
 
         Ready: function () {
             NE.Events.Execute(_eventOwnerKey, _onUIReadyKey, {});
+            this.Loaded = true;
         },
 
         HideVIsitedItems: function (i_chapter, i_page) {
@@ -189,7 +194,7 @@ NE.UI = (function () {
         },
 
         Unlock: function (i_chapter, i_page) {
-       
+
 
             for (var i = i_chapter; i < NE.CourseTree.chapters.length; i++) {
                 var oneVisible = false;
@@ -200,13 +205,13 @@ NE.UI = (function () {
                     var page = chapter.pages[j];
                     var onlyChapterButAfter = i_page === undefined && i > i_chapter;
                     var pageAndAfter = i_page !== undefined && (j > i_page || i > i_chapter);
- 
+
                     if (page.stopprogress && (onlyChapterButAfter || pageAndAfter)) {
                         if (oneVisible) $('#NE-chapter-' + i).removeClass('NE-nav-hidden');
                         return;
                     }
                     if (NE.CourseTree.chapters[i].pages[j].keepprogress !== false) {
- 
+
                         $('#NE-page-' + i + '-' + j).removeClass('NE-nav-hidden');
                         $('#NE-page-' + i + '-' + j).find('.NE-nav-hidden').removeClass('NE-nav-hidden');
                     }
@@ -277,17 +282,23 @@ NE.UI = (function () {
             var animTime = i_skipAnimation ? 0 : 300;
             var doNotScroll = i_stay || false;
 
-            if (currentPage.hasClass('hidden') || currentPage.hasClass('NE-nav-hidden')) {
+            if (currentPage.hasClass('hidden') || currentPage.hasClass('NE-nav-hidden') || currentPage.css('display') === 'none') {
                 currentPage.parent('.NE-chapter').removeClass('NE-nav-hidden hidden');
-                currentPage.find('.NE-page').removeClass('NE-nav-hidden');
+                currentPage.find('.NE-page').removeClass('NE-nav-hidden').css('display', '');
                 currentPage.removeClass('NE-nav-hidden hidden').slideUp(0).slideDown(animTime, 'swing', function () {
                     NE.UI.Unlock(NE.Navigation.CurrentChapterIndex, NE.Navigation.CurrentPageIndex);
-                    if(!doNotScroll) NE.UI.ScrollToPage(i_skipAnimation);
+                    if (!doNotScroll) NE.UI.ScrollToPage(i_skipAnimation);
                 });
             }
             else {
                 if (!doNotScroll) NE.UI.ScrollToPage(i_skipAnimation);
             }
+
+            NE.Events.Execute(_eventOwnerKey, _onPageRevealKey, {
+                DOMPage: currentPage,
+                ID: currentPage.attr('id')
+            });
+
         },
 
         ScrollToPage: function (i_skipAnimation) {
@@ -300,7 +311,7 @@ NE.UI = (function () {
             var currentPage = NE.Navigation.CurrentPageDiv();
             var currentChapter = NE.Navigation.CurrentChapterDiv();
             var scroller = $('#' + NE.Constants.SCROLL_CONTAINER_ID);
-           
+
             scroller.animate({ 'scrollTop': '+=' + (currentChapter.position().top + currentPage.position().top - _topMenuOffset) }, animTime, function () {
                 NE.EventHandlers.AfterPageScroll();
                 NE.UI.AcceptScrollEvent = true;
@@ -313,6 +324,20 @@ NE.UI = (function () {
             var scroller = $('#' + NE.Constants.SCROLL_CONTAINER_ID);
             $('#NE-scroll-hint').removeClass('hidden').addClass('active');
             _scrollHintAnimate(scroller, scroller.scrollTop());
+        },
+
+        PrepareVideo: function (i_pageObj) {
+
+            var isVertPage = i_pageObj.hasClass('NE-vert-page-content');
+
+            i_pageObj.find('.NE-video-container').each(function () {
+                var vid = $(this);
+                if (vid.parents('.NE-vert-page').length < 1 || isVertPage) {
+                    vid.addClass('');
+                    vid.click();
+                }
+            });
+
         },
 
         EnableContentScroll: function () {

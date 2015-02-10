@@ -20,9 +20,15 @@
     color: #959595;
 }
 
+.NE-scrolling-text {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .NE-letter-text {
     font-family: 'Mercury SSm A','Mercury SSm B',Palatino,'Palatino Linotype','Palatino LT STD',Constantia,'Times New Roman',serif;
-    font-size: 18px;
+    font-size: 19px;
+    line-height: 28px;
 }
 
     .NE-letter-text h3 {

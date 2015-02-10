@@ -176,7 +176,7 @@ NE.Plugin.topmenu.EventHandlers = (function () {
             NE.UI.Unlock(chapterIndex, 0);
 
             NE.Navigation.ToChapter(chapterIndex);
-            NE.UI.ScrollToPage();
+            NE.UI.RevealPage();
 
             $('.NE-chapter-label').click();
 

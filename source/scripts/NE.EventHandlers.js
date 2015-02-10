@@ -37,11 +37,13 @@ NE.EventHandlers = (function () {
     var _bookmarkTImer;
     var _resizeTimer;
     var _chaptersLoaded = 0;
+    var _currentPage = '';
 
     function _oneChapterLoaded(i_chapter) {
         i_chapter.OnLoaded = function (e) {
+
             _chaptersLoaded++;
-            if (_chaptersLoaded >= NE.CourseTree.chapters.length - 1) {
+            if (_chaptersLoaded == NE.CourseTree.chapters.length - 1) {
                 NE.EventHandlers.ChaptersLoaded();
             }
 
@@ -89,7 +91,7 @@ NE.EventHandlers = (function () {
                 NE.Plugin.Load({
                     name: $(this).data('plugin'),
                     node: $(this),
-                    settings: {}
+                    settings: NE.Plugin.ParseSettings($(this).data('settings'))
                 }, function (i_instance) {
                     i_instance.Init();
                 });
@@ -100,6 +102,7 @@ NE.EventHandlers = (function () {
                     name: 'chapter',
                     node: $('<div></div>').appendTo('#' + NE.Constants.SCROLL_CONTAINER_ID),
                     settings: {
+                        ID: NE.Constants.CHAPTER_ID_PREFIX + i,
                         index: i,
                         chapter: NE.CourseTree.chapters[i]
                     }
@@ -119,6 +122,9 @@ NE.EventHandlers = (function () {
 
             clearTimeout(_resizeTimer);
             _resizeTimer = setTimeout(function () {
+
+                if (!NE.UI.Loaded) return;
+
                 $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
 
                 NE.UI.EnableContentScroll();
@@ -153,13 +159,17 @@ NE.EventHandlers = (function () {
                 swDocument: '#' + NE.Constants.SCROLL_CONTAINER_ID
             });
 
-    
-            NE.Plugin['NE-top-chapter-navigation'].Update();
+
             $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID).css('visibility', 'visible');
 
             NE.SCORM.NavigateToBookmark();
 
+            NE.Plugin['NE-top-chapter-navigation'].Update();
             NE.UI.Ready();
+
+            $('#NE-preloader').hide();
+
+            NE.UI.PrepareVideo(NE.Navigation.CurrentPageDiv());
 
         },
 
@@ -167,17 +177,16 @@ NE.EventHandlers = (function () {
 
             if (!i_item.is(':visible')) return;
 
+            var ismostVisible = scrollObj.visibility > 0.8;
+            if (!ismostVisible) return;
+
+
             var pageIndex = parseInt(i_item.data('index'), 10);
             var chapterIndex = parseInt(i_item.data('chapter'), 10);
 
-            var ismostVisible = scrollObj.visibility > 0.8;
-            var isNewPage = i_item.attr('id') != NE.Navigation.CurrentPageDiv().attr('id');
-            var isLastPage = pageIndex == NE.CourseTree.chapters[chapterIndex].pages.length - 1;
 
-            if (ismostVisible && isNewPage && isLastPage) {
-                var sectionID = NE.CourseTree.SCO_name + '_' + chapterIndex;
-                NE.LMS.Sections.SetState(sectionID, 'completed');
-            }
+            var isNewPage = i_item.attr('id') != _currentPage;
+            var isLastPage = pageIndex == NE.CourseTree.chapters[chapterIndex].pages.length - 1;
 
             if (!NE.UI.AcceptScrollEvent) return;
 
@@ -187,6 +196,7 @@ NE.EventHandlers = (function () {
                 NE.Navigation.CurrentPageIndex = pageIndex;
 
                 NE.Navigation.ToPage(NE.Navigation.CurrentPageIndex, NE.Navigation.CurrentChapterIndex);
+                _currentPage = NE.Navigation.CurrentPageDiv().attr('id');
 
                 clearTimeout(_bookmarkTImer);
 
@@ -221,6 +231,12 @@ NE.EventHandlers = (function () {
                 NE.UI.HideVIsitedItems(prevPage.chapter, prevPage.page);
             }
 
+            var sectionID = NE.CourseTree.SCO_name + '_' + NE.Navigation.CurrentChapterIndex;
+            if (NE.LMS.Sections.GetState(sectionID).toLowerCase() !== 'completed') {
+                NE.LMS.Sections.SetState(sectionID, 'completed');
+            }
+
+
             $('.NE-video').each(function () {
                 $(this)[0].pause();
             });
@@ -231,9 +247,9 @@ NE.EventHandlers = (function () {
             if (!NE.SCORM.InitBookmark) {
                 NE.LMS.Bookmark.SetBookmark(NE.Navigation.CurrentPageDiv().attr('id'));
             }
-
+         
+            NE.UI.PrepareVideo(NE.Navigation.CurrentPageDiv());
             NE.Plugin['NE-top-chapter-navigation'].Update();
-
         },
 
         AfterPageScroll: function () {
@@ -253,7 +269,8 @@ NE.EventHandlers = (function () {
             NE.UI.Unlock(chapterIndex, 0);
 
             NE.Navigation.ToChapter(chapterIndex);
-            NE.UI.ScrollToPage();
+
+            NE.UI.RevealPage();
 
         },
 

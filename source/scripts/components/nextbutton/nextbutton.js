@@ -114,6 +114,7 @@ NE.Plugin.nextbutton = function (i_params) {
             var data = params[0].data;
             var initClasses = _settings.initclasses ? ' ' + _settings.initclasses : '';
             var iconClass = _settings.iconclass || 'fa-angle-down';
+            data = data.replace(/{ID}/g, _settings.ID);
             data = data.replace(/{text}/g, _settings.text);
             data = data.replace(/{initClasses}/g, initClasses);
             data = data.replace(/{iconclass}/g, iconClass);

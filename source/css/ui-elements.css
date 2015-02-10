@@ -24,13 +24,6 @@
         color: white;
     }
 
-
-    .NE-button.disable {
-        cursor: default;
-        background-color: #d9d9d9;
-        border-color: #808080;
-    }
-
     .NE-button.red {
         background-color: #FF3631;
     }
@@ -61,6 +54,12 @@
         border: 1px solid #c0c0c0;
     }
 
+    .NE-button.darkwhite {
+        background-color: white;
+        color: #303030;
+        border: 1px solid #a6a6a6;
+    }
+
     .NE-button.grey {
         background-color: #f2f2f2;
         border: 1px solid #c0c0c0;
@@ -89,6 +88,21 @@
         border-color: #307339;
         color: white;
     }
+
+
+    .NE-button.disable {
+        cursor: default;
+        color: white;
+        background-color: #d9d9d9;
+        border-color: transparent;
+    }
+
+        .NE-button.disable:hover {
+            cursor: default;
+            color: white;
+            background-color: #d9d9d9;
+            border-color: transparent;
+        }
 
 
 .NE-big-button {

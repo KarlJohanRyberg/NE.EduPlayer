@@ -116,8 +116,9 @@ NE.Plugin.verticalnav.EventHandlers = (function () {
 
         NavTo: function (instance) {
             var panel = $('#' + instance.PanelSettings.ID).find('.NE-vert-page-holder').first();
-            var currentSlideDiv = $('#' + instance.PanelSettings.ID + '-' + instance.CurrentSlide);
+            instance.CurrentPanel = $('#' + NE.Constants.PAGE_ID_PREFIX + instance.VisibleSlides[instance.CurrentSlide].attr('id'));
             panel.stop().animate({ 'margin-left': (-instance.CurrentSlide * 100) + '%' }, 300);
+            NE.UI.PrepareVideo(instance.CurrentPanel);
             _markIcon(instance);
         },
 

@@ -59,11 +59,9 @@ NE.Plugin.chapter = function (i_params) {
 
     function _addToDOM(i_content) {
         _params.node.replaceWith(i_content);
-        i_content.first().attr('id', NE.Constants.CHAPTER_ID_PREFIX + _settings.index);
     }
 
     function _pageOnLoad(e) {
-     
         if (e.chapter == _settings.index) {
             me.LoadedPages++;
             if (me.LoadedPages == _settings.chapter.pages.length) {
@@ -74,6 +72,24 @@ NE.Plugin.chapter = function (i_params) {
             }
 
         }
+    }
+
+    function _removeDuplicateRanPages(pageList) {
+
+        var nums = [];
+        for (var i = 0; i < pageList.length; i++) {
+            for (var j = 0; j < NE.CourseTree.RandomSelectedPages.length; j++) {
+                if (pageList[i] == NE.CourseTree.RandomSelectedPages[j]) {
+                    nums.push(i);
+                }
+            }
+        }
+
+        for (var n = 0; n < nums.length; n++) {
+            pageList.splice(nums[n] - n, 1);
+        }
+
+        return pageList;
     }
 
     //////////////////////
@@ -108,7 +124,7 @@ NE.Plugin.chapter = function (i_params) {
 
             NE.Plugin.ApplyTemplate(this, function (data) {
 
-                _myDOMContent = $(data);
+                _myDOMContent = $(data.replace(/{ID}/g, _settings.ID));
                 _addToDOM(_myDOMContent);
                 NE.Plugin.LoadAll(_myDOMContent.first(), _pageOnLoad);
 
@@ -117,18 +133,25 @@ NE.Plugin.chapter = function (i_params) {
         },
 
         AddPages: function (params) {
-            
+
             var returnVal = '';
             for (var i = 0; i < _settings.chapter.pages.length; i++) {
 
                 var page = NE.CourseTree.chapters[_settings.index].pages[i];
                 var dataFile = page.datafile;
-                if (dataFile.indexOf('|') != -1) {
-                    var alts = dataFile.split('|');
-                    dataFile = alts[Math.round(Math.random() * (alts.length - 1))];
-                }
-                var contentFile = NE.Constants.CONTENT_BASE_PATH + '/content/data/' + dataFile + '.html';
 
+                if (dataFile.indexOf('|') != -1) {
+
+                    if (!NE.CourseTree.RandomSelectedPages) NE.CourseTree.RandomSelectedPages = [];
+
+                    var alts = _removeDuplicateRanPages(dataFile.split('|'));
+                    dataFile = alts[Math.floor(Math.random() * alts.length)];
+
+                    NE.CourseTree.RandomSelectedPages.push(dataFile);
+                }
+
+                var contentFile = NE.Constants.CONTENT_BASE_PATH + '/content/data/' + dataFile + '.html';
+                page.ID = NE.Constants.PAGE_ID_PREFIX + _settings.index + '-' + i;
                 page.chapterIndex = _settings.index;
                 page.index = i;
                 page.datafile = contentFile;

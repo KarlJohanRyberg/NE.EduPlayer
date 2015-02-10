@@ -75,12 +75,17 @@ NE.Scroll = (function () {
         //
         /////////////////////
 
-        ToElementY: function (jqElement, anchor, callback) {
+        ToElementY: function (jqElement, anchor, padding, callback) {
+            
+            if (typeof padding === 'function') {
+                callback = padding;
+                padding = null;
+            }
 
             var parentPage = $('#' + NE.Constants.SCROLL_CONTAINER_ID); //jqElement.parents('.NE-chapter').first();
             var viewPort = $('#' + NE.Constants.MAIN_CONTENT_CONTAINER_ID);
 
-            var viewTarget = viewPort.offset().top + 30;
+            var viewTarget = viewPort.offset().top;// + 30;
             var scrollAnchor = jqElement.offset().top;
 
             if (!anchor || (anchor && anchor.toString().toLowerCase() == 'middle')) {
@@ -94,6 +99,7 @@ NE.Scroll = (function () {
 
 
             var diff = scrollAnchor - viewTarget;
+            diff -= padding || 0;
             var time = Math.abs(diff);
             time = Math.min(Math.max(time, 100), 500);
 

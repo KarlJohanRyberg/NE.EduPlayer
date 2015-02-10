@@ -108,7 +108,7 @@ NE.Plugin.video = function (i_params) {
                     if ($(this).hasClass('playing')) return;
 
                     var vidHTML = '';
-                    vidHTML += '<video class="NE-video" width="640" controls="controls" autoplay="autoplay" poster="' + _settings.poster + '">';
+                    vidHTML += '<video class="NE-video" width="640" controls="controls" poster="' + _settings.poster + '">';
                     vidHTML += '<source src="' + _settings.video + '" type="video/mp4"/>';
                     vidHTML += '</video>';
 

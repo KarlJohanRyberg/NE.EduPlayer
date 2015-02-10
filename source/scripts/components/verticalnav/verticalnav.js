@@ -63,42 +63,26 @@ NE.Plugin.verticalnav = function (i_params) {
         var hiddenElements = [];
 
         $('.NE-eq-height-padder', panelSelector).css('height', '');
-      
+
+        var pageHolder = $('.NE-vert-page-holder', '#' + _settings.ID).first();
+        var containerHeight = pageHolder.outerHeight();
+        containerHeight = containerHeight > 0 ? containerHeight : pageHolder.data('orgHeight');
 
         $('.NE-eq-height', panelSelector).each(function () {
+            var myHeight = $(this).outerHeight();
+            myHeight = myHeight > 0 ? myHeight : $(this).data('orgHeight');
 
-            $(this).parents().each(function () {
-                if ($(this).hasClass('hidden')) {
-                    hiddenElements.push([$(this), 'hidden']);
-                    $(this).removeClass('hidden');
-                   $(this).css('display', '');
-                }
-                else if ($(this).hasClass('NE-nav-hidden')) {
-                    hiddenElements.push([$(this), 'NE-nav-hidden']);
-                    $(this).removeClass('NE-nav-hidden');
-                    $(this).css('display', '');
-                }
-            });
-        });
-    
-        $('.NE-eq-height', panelSelector).each(function () {
-            var orgHeight = $(this).outerHeight();
-            $(this).data('orgHeight', orgHeight);
-            if (orgHeight > tallest && $(this).hasClass('filter-visible')) {
-                tallest = orgHeight;
+            var padding = containerHeight - myHeight;
+            var padder = $(this).find('.NE-eq-height-padder');
+
+            if (padder.length) {
+                padder.css('height', padding + 'px');
+            }
+            else {
+                $(this).css('height', myHeight + 'px');
             }
         });
 
-        for (var i = 0; i < hiddenElements.length; i++) {
-            hiddenElements[i][0].addClass(hiddenElements[i][1]);
-        }
-
-        if (tallest > 0) {
-            $('.NE-eq-height', panelSelector).each(function () {
-                var padding = tallest - $(this).data('orgHeight');
-                $(this).find('.NE-eq-height-padder').css('height', padding + 'px');
-            });
-        }
 
     }
 
@@ -125,7 +109,15 @@ NE.Plugin.verticalnav = function (i_params) {
             panel.find('.NE-vert-page-navbar').hide();
         }
 
-        $('.NE-eq-height', $('#' + _settings.ID)).each(function () {
+        NE.Events.Add(NE.UI.ON_PAGE_REVEAL, function (e) {
+            if (e.ID == $('#' + _settings.ID).parents('.NE-page').first().attr('id')) {
+                _eqHeightCols();
+            }
+        });
+
+        var pageHolder = $('.NE-vert-page-holder', '#' + _settings.ID).first();
+        pageHolder.data('orgHeight', pageHolder.outerHeight());
+        $('.NE-eq-height', '#' + _settings.ID).each(function () {
             $(this).data('orgHeight', $(this).outerHeight());
         });
 
@@ -208,6 +200,7 @@ NE.Plugin.verticalnav = function (i_params) {
 
             for (var i = 0; i < _settings.pages.length; i++) {
                 var data = params[0].data;
+                data = data.replace(/{pageID}/g, NE.Constants.PAGE_ID_PREFIX + _settings.ID + '-' + i);
                 data = data.replace(/{ID}/g, _settings.ID);
                 data = data.replace(/{index}/g, i);
                 data = data.replace(/{datafile}/g, _settings.pages[i].datafile);
@@ -236,6 +229,12 @@ NE.Plugin.verticalnav = function (i_params) {
             return returnVal;
         },
 
+        AdjustHeight: function () {
+            var currentSlideDiv = $('#' + me.PanelSettings.ID + '-' + me.CurrentSlide);
+            var pageHolder = $('.NE-vert-page-holder', '#' + _settings.ID).first();
+            pageHolder.height(currentSlideDiv.outerHeight());
+        },
+
         Filter: function (i_groupIndex, i_index) {
             me.VisibleSlides = [];
 
@@ -255,7 +254,7 @@ NE.Plugin.verticalnav = function (i_params) {
                 allPages.show();
                 visiblePages = allPages;
             }
-
+    
             visiblePages.each(function () {
                 $(this).find('.NE-eq-height').addClass('filter-visible');
                 me.VisibleSlides.push($(this));
@@ -273,7 +272,7 @@ NE.Plugin.verticalnav = function (i_params) {
             });
 
             NE.Plugin.verticalnav.EventHandlers.NavTo(me);
-      
+
             _eqHeightCols();
         },
 
